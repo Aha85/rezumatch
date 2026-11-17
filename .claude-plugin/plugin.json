@@ -1,0 +1,20 @@
+{
+  "name": "rezumatch",
+  "version": "1.0.0",
+  "description": "Tailor your resume and cover letter to a specific job listing, ATS-ready, with an estimated match score. A step-by-step coach that never invents facts. English and Hebrew.",
+  "author": {
+    "name": "Danny Shaket",
+    "url": "https://www.dannyshaket.com"
+  },
+  "homepage": "https://aha85.github.io/rezumatch/",
+  "license": "MIT",
+  "keywords": [
+    "resume",
+    "cv",
+    "ats",
+    "job search",
+    "cover letter",
+    "hebrew"
+  ],
+  "repository": "https://github.com/Aha85/rezumatch"
+}

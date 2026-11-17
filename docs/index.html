@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RezuMatch - fit your resume to the job you want</title>
+<meta name="description" content="A free add-on for Claude that fits your resume to one job listing, step by step, with an estimated ATS score. English and Hebrew.">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --magenta:#CC0070; --magenta-bright:#E6007E; --pink-wash:#FDE6F2;
+    --ink:#1A1A1A; --ink-soft:#5E5E5E; --rule:#D9D9DC; --rule-soft:#ECECEF; --bg:#FFFFFF; --stage:#F6F6F8;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:"Heebo", Arial, sans-serif; font-size:17px; line-height:1.6; }
+  a { color:var(--magenta); font-weight:700; }
+  .wrap { max-width:860px; margin:0 auto; padding:0 20px; }
+  [data-lang="en"] .he, [data-lang="he"] .en { display:none !important; }
+
+  header.top { border-bottom:1px solid var(--rule); background:#fff; position:sticky; top:0; z-index:5; }
+  header.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+  .logo { font-weight:800; font-size:20px; color:var(--magenta); text-decoration:none; }
+  .langs { display:flex; gap:4px; }
+  .langs button { font:inherit; font-size:14px; font-weight:700; border:1px solid var(--rule); background:#fff; color:var(--ink); padding:5px 12px; border-radius:999px; cursor:pointer; }
+  .langs button[aria-pressed="true"] { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+  .hero { padding:56px 0 40px; }
+  .hero h1 { font-size:clamp(32px, 6vw, 48px); line-height:1.12; margin:0 0 14px; font-weight:800; }
+  .hero h1 em { font-style:normal; color:var(--magenta); }
+  .hero p.lead { font-size:19px; color:var(--ink-soft); margin:0 0 26px; max-width:640px; }
+  .btns { display:flex; flex-wrap:wrap; gap:12px; }
+  .btn { display:inline-block; text-decoration:none; font-weight:700; padding:13px 22px; border-radius:10px; border:2px solid var(--magenta); }
+  .btn.primary { background:var(--magenta); color:#fff; }
+  .btn.ghost { background:#fff; color:var(--magenta); }
+  .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:36px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+  .facts div { padding:16px 14px; font-size:15px; }
+  .facts div + div { border-inline-start:1px solid var(--rule-soft); }
+  .facts b { display:block; font-size:16px; }
+
+  section { padding:44px 0; border-top:1px solid var(--rule); }
+  section h2 { font-size:28px; line-height:1.2; margin:0 0 8px; font-weight:800; }
+  section .sub { color:var(--ink-soft); margin:0 0 22px; }
+  .note { background:var(--pink-wash); border-radius:10px; padding:14px 18px; font-size:15.5px; }
+
+  ul.check { list-style:none; padding:0; margin:0; }
+  ul.check li { padding:10px 0; border-bottom:1px solid var(--rule-soft); padding-inline-start:30px; position:relative; }
+  ul.check li::before { content:""; position:absolute; inset-inline-start:2px; top:17px; width:14px; height:8px; border-left:3px solid var(--magenta); border-bottom:3px solid var(--magenta); transform:rotate(-45deg); }
+
+  .option { border:1px solid var(--rule); border-radius:12px; padding:24px; margin-bottom:22px; }
+  .option h3 { margin:0 0 4px; font-size:22px; }
+  .tag { display:inline-block; font-size:13px; font-weight:700; color:var(--magenta); background:var(--pink-wash); border-radius:999px; padding:2px 10px; margin-bottom:10px; }
+  ol.steps { list-style:none; counter-reset:s; padding:0; margin:16px 0 0; }
+  ol.steps > li { counter-increment:s; position:relative; padding-inline-start:48px; margin-bottom:18px; min-height:34px; }
+  ol.steps > li::before { content:counter(s); position:absolute; inset-inline-start:0; top:-2px; width:34px; height:34px; border-radius:50%; background:var(--magenta); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:15px; }
+  ol.steps > li small { display:block; color:var(--ink-soft); font-size:14.5px; }
+  .code { display:flex; align-items:center; gap:10px; margin-top:8px; background:var(--stage); border:1px solid var(--rule); border-radius:8px; padding:8px 8px 8px 14px; direction:ltr; }
+  .code code { flex:1; font-family:Consolas, "Courier New", monospace; font-size:15px; overflow-x:auto; white-space:nowrap; }
+  .code button { font:inherit; font-size:13px; font-weight:700; border:1px solid var(--rule); background:#fff; border-radius:6px; padding:5px 10px; cursor:pointer; color:var(--ink); }
+  .code button.done { background:var(--ink); color:#fff; }
+
+  .flow { display:grid; grid-template-columns:repeat(2,1fr); gap:0 28px; }
+  .flow .item { padding:14px 0; border-bottom:1px solid var(--rule-soft); display:flex; gap:14px; }
+  .flow .n { flex:none; width:30px; height:30px; border-radius:50%; border:2px solid var(--magenta); color:var(--magenta); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:14px; }
+  .flow b { display:block; }
+  .flow span { color:var(--ink-soft); font-size:15.5px; }
+
+  .tips { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .tip { border-top:3px solid var(--magenta-bright); padding-top:12px; }
+  .tip b { display:block; margin-bottom:2px; }
+  .tip p { margin:0; color:var(--ink-soft); font-size:15.5px; }
+
+  details { border-bottom:1px solid var(--rule); padding:14px 0; }
+  details summary { cursor:pointer; font-weight:700; list-style:none; position:relative; padding-inline-end:28px; }
+  details summary::-webkit-details-marker { display:none; }
+  details summary::after { content:"+"; position:absolute; inset-inline-end:4px; top:-2px; font-size:22px; color:var(--magenta); }
+  details[open] summary::after { content:"-"; }
+  details p { margin:10px 0 0; color:var(--ink-soft); }
+
+  footer { border-top:1px solid var(--rule); padding:28px 0 40px; font-size:14.5px; color:var(--ink-soft); }
+  footer .links { display:flex; flex-wrap:wrap; gap:8px 18px; margin-bottom:10px; }
+
+  @media (max-width:680px) {
+    body { font-size:16px; }
+    .facts, .flow, .tips { grid-template-columns:1fr; }
+    .facts div + div { border-inline-start:0; border-top:1px solid var(--rule-soft); }
+    .option { padding:18px; }
+    .hero { padding:36px 0 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#">RezuMatch</a>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-set="en" aria-pressed="true">English</button>
+      <button type="button" data-set="he" aria-pressed="false">עברית</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="en">
+      <h1>Fit your resume to <em>the job you want.</em></h1>
+      <p class="lead">A free add-on for Claude. Give it your resume and one job listing. It asks you simple questions, fixes what hiring software and recruiters look for, and hands you a one-page PDF and a matching cover letter.</p>
+      <div class="btns">
+        <a class="btn primary" href="#install">How to install</a>
+        <a class="btn ghost" href="#use">How it works</a>
+      </div>
+      <div class="facts">
+        <div><b>Your match score</b>before and after, with what's missing</div>
+        <div><b>Never makes things up</b>every fact comes from you</div>
+        <div><b>English and Hebrew</b>including right-to-left resumes</div>
+      </div>
+    </div>
+    <div class="he">
+      <h1>מתאימים את קורות החיים <em>למשרה שאתם רוצים.</em></h1>
+      <p class="lead">תוסף חינמי ל-Claude. נותנים לו את קורות החיים ומשרה אחת. הוא שואל שאלות פשוטות, מתקן את מה שמערכות הגיוס והמגייסים מחפשים, ומחזיר לכם קורות חיים ב-PDF בעמוד אחד ומכתב פנייה שמתאים להם.</p>
+      <div class="btns">
+        <a class="btn primary" href="#install">איך מתקינים</a>
+        <a class="btn ghost" href="#use">איך זה עובד</a>
+      </div>
+      <div class="facts">
+        <div><b>ציון התאמה</b>לפני ואחרי, עם מה שחסר</div>
+        <div><b>לא ממציא כלום</b>כל פרט מגיע מכם</div>
+        <div><b>עברית ואנגלית</b>כולל קורות חיים מימין לשמאל</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <section>
+    <div class="en">
+      <h2>Why it matters</h2>
+      <p class="sub">Most companies run your resume through software before a person sees it. That software is called an ATS (applicant tracking system).</p>
+      <p>If your resume doesn't use the words from the job listing, or the software can't read its layout (two columns, tables, a sidebar), the recruiter may never find you. RezuMatch fixes both, and shows you a score so you can see the difference.</p>
+    </div>
+    <div class="he">
+      <h2>למה זה חשוב</h2>
+      <p class="sub">ברוב החברות קורות החיים עוברים קודם דרך תוכנה, ורק אחר כך מגיעים לבן אדם. התוכנה הזו נקראת ATS (מערכת לניהול מועמדים).</p>
+      <p>אם בקורות החיים אין את המילים מהמודעה, או שהתוכנה לא מצליחה לקרוא את העיצוב (שתי עמודות, טבלאות, פס צד), יכול להיות שהמגייס בכלל לא ימצא אתכם. RezuMatch מתקן את שניהם, ומראה לכם ציון כדי שתראו את ההבדל.</p>
+    </div>
+  </section>
+
+  <!-- BEFORE YOU START -->
+  <section>
+    <div class="en">
+      <h2>Before you start</h2>
+      <p class="sub">That's all you need:</p>
+      <ul class="check">
+        <li>A Claude account (<a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>)</li>
+        <li>Your resume: a PDF, a Word file, the text, or your LinkedIn profile. No resume? It builds one with you.</li>
+        <li>The job listing you want: the text or the link</li>
+        <li>Some quiet time. It asks you questions one by one, and your answers make the resume better.</li>
+      </ul>
+    </div>
+    <div class="he">
+      <h2>לפני שמתחילים</h2>
+      <p class="sub">זה כל מה שצריך:</p>
+      <ul class="check">
+        <li>חשבון Claude (<a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>)</li>
+        <li>קורות החיים שלכם: PDF, קובץ Word, הטקסט עצמו, או הפרופיל בלינקדאין. אין לכם קורות חיים? הוא יבנה אותם איתכם.</li>
+        <li>המשרה שאתם רוצים: הטקסט של המודעה או הקישור</li>
+        <li>קצת זמן שקט. הוא שואל שאלה אחת בכל פעם, והתשובות שלכם הן מה שהופך את קורות החיים לטובים יותר.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section id="install">
+    <div class="en">
+      <h2>How to install</h2>
+      <p class="sub">Pick one way. If you're not sure, choose the first.</p>
+
+      <div class="option">
+        <span class="tag">Easiest: nothing to install</span>
+        <h3>On claude.ai, in your browser</h3>
+        <ol class="steps">
+          <li><b>Download the RezuMatch file.</b> <a href="https://github.com/Aha85/rezumatch/releases/latest/download/resume-tailor.zip">Download resume-tailor.zip</a><small>Don't open it. Leave it in your Downloads folder.</small></li>
+          <li><b>Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> and sign in.</b></li>
+          <li><b>Open Settings.</b><small>Click your name at the bottom left, then Settings.</small></li>
+          <li><b>Open "Capabilities".</b><small>Make sure "Code execution and file creation" is turned on.</small></li>
+          <li><b>Find "Skills" and click "Upload skill".</b><small>Choose the file you downloaded in step 1.</small></li>
+          <li><b>Start a new chat and write:</b> "Help me fit my resume to this job".</li>
+        </ol>
+        <p class="note">Can't find "Skills"? Menus move sometimes, and Skills may depend on your Claude plan. Search the Claude help center for "upload a skill".</p>
+      </div>
+
+      <div class="option">
+        <span class="tag">Best results: automatic checks and PDF</span>
+        <h3>In the Claude desktop app or Claude Code</h3>
+        <ol class="steps">
+          <li><b>Open the Claude app on your computer and go to the "Code" tab.</b><small>Or open Claude Code in your terminal.</small></li>
+          <li><b>Copy this line, paste it in the message box and press Enter:</b>
+            <div class="code"><code>/plugin marketplace add Aha85/rezumatch</code><button type="button" data-copy>Copy</button></div></li>
+          <li><b>Then copy this line, paste it and press Enter:</b>
+            <div class="code"><code>/plugin install rezumatch@rezumatch</code><button type="button" data-copy>Copy</button></div></li>
+          <li><b>Type <code>/tailor</code> and press Enter.</b> That's it, you've started.</li>
+        </ol>
+        <p class="note">For the PDF and the automatic checks, your computer needs Google Chrome or Microsoft Edge, and Python 3 (<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">free download</a>). Missing something? It still works, and Claude tells you what to do.</p>
+      </div>
+    </div>
+
+    <div class="he">
+      <h2>איך מתקינים</h2>
+      <p class="sub">בוחרים דרך אחת. לא בטוחים? בחרו בראשונה.</p>
+
+      <div class="option">
+        <span class="tag">הכי פשוט: אין מה להתקין</span>
+        <h3>ב-claude.ai, בדפדפן</h3>
+        <ol class="steps">
+          <li><b>מורידים את הקובץ של RezuMatch.</b> <a href="https://github.com/Aha85/rezumatch/releases/latest/download/resume-tailor.zip">להורדת resume-tailor.zip</a><small>לא פותחים אותו. משאירים אותו בתיקיית ההורדות.</small></li>
+          <li><b>נכנסים ל-<a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> ומתחברים.</b></li>
+          <li><b>פותחים את ההגדרות.</b><small>לוחצים על השם שלכם למטה בצד, ואז Settings.</small></li>
+          <li><b>נכנסים ל-"Capabilities".</b><small>מוודאים שהאפשרות "Code execution and file creation" מופעלת.</small></li>
+          <li><b>מחפשים "Skills" ולוחצים "Upload skill".</b><small>בוחרים את הקובץ שהורדתם בשלב 1.</small></li>
+          <li><b>פותחים שיחה חדשה וכותבים:</b> "תעזור לי להתאים את קורות החיים שלי למשרה הזו".</li>
+        </ol>
+        <p class="note">לא מוצאים את "Skills"? התפריטים זזים מדי פעם, ויכול להיות שזה תלוי במנוי שלכם ב-Claude. חפשו במרכז העזרה של Claude את "upload a skill".</p>
+      </div>
+
+      <div class="option">
+        <span class="tag">התוצאה הכי טובה: בדיקות אוטומטיות ו-PDF</span>
+        <h3>באפליקציית Claude למחשב או ב-Claude Code</h3>
+        <ol class="steps">
+          <li><b>פותחים את אפליקציית Claude במחשב ועוברים ללשונית "Code".</b><small>או פותחים את Claude Code בטרמינל.</small></li>
+          <li><b>מעתיקים את השורה הזו, מדביקים בתיבת ההודעה ולוחצים Enter:</b>
+            <div class="code"><code>/plugin marketplace add Aha85/rezumatch</code><button type="button" data-copy>העתקה</button></div></li>
+          <li><b>אחר כך מעתיקים את השורה הזו, מדביקים ולוחצים Enter:</b>
+            <div class="code"><code>/plugin install rezumatch@rezumatch</code><button type="button" data-copy>העתקה</button></div></li>
+          <li><b>כותבים <code>/tailor</code> ולוחצים Enter.</b> זהו, התחלתם.</li>
+        </ol>
+        <p class="note">בשביל ה-PDF והבדיקות האוטומטיות צריך במחשב Google Chrome או Microsoft Edge, וגם Python 3 (<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">הורדה חינמית</a>). חסר משהו? זה עדיין עובד, ו-Claude יגיד לכם מה לעשות.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="use">
+    <div class="en">
+      <h2>How it works</h2>
+      <p class="sub">Claude leads, you answer. One question at a time.</p>
+      <div class="flow">
+        <div class="item"><div class="n">1</div><div><b>Share your resume</b><span>Upload it, paste it, or give your LinkedIn link.</span></div></div>
+        <div class="item"><div class="n">2</div><div><b>Paste the job listing</b><span>The text works best. A link works too.</span></div></div>
+        <div class="item"><div class="n">3</div><div><b>See your score</b><span>Plus the 3 biggest problems, in plain words.</span></div></div>
+        <div class="item"><div class="n">4</div><div><b>Answer a few questions</b><span>Only about what's missing. It won't ask you to prove what your resume already shows.</span></div></div>
+        <div class="item"><div class="n">5</div><div><b>Approve and pick a design</b><span>You see every change before it goes in.</span></div></div>
+        <div class="item"><div class="n">6</div><div><b>Get your files</b><span>"Your Name Resume.pdf", and a cover letter if you want one.</span></div></div>
+      </div>
+    </div>
+    <div class="he">
+      <h2>איך זה עובד</h2>
+      <p class="sub">Claude מוביל, אתם עונים. שאלה אחת בכל פעם.</p>
+      <div class="flow">
+        <div class="item"><div class="n">1</div><div><b>משתפים את קורות החיים</b><span>מעלים קובץ, מדביקים טקסט או שולחים קישור ללינקדאין.</span></div></div>
+        <div class="item"><div class="n">2</div><div><b>מדביקים את המשרה</b><span>הטקסט של המודעה עובד הכי טוב. גם קישור מתאים.</span></div></div>
+        <div class="item"><div class="n">3</div><div><b>רואים את הציון</b><span>ואת 3 הבעיות הכי גדולות, במילים פשוטות.</span></div></div>
+        <div class="item"><div class="n">4</div><div><b>עונים על כמה שאלות</b><span>רק על מה שחסר. הוא לא יבקש להוכיח מה שכבר כתוב אצלכם.</span></div></div>
+        <div class="item"><div class="n">5</div><div><b>מאשרים ובוחרים עיצוב</b><span>אתם רואים כל שינוי לפני שהוא נכנס.</span></div></div>
+        <div class="item"><div class="n">6</div><div><b>מקבלים את הקבצים</b><span>קורות חיים ב-PDF, ומכתב פנייה אם רוצים.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section>
+    <div class="en">
+      <h2>Get the most out of it</h2>
+      <p class="sub">What makes the difference between an okay resume and a strong one.</p>
+      <div class="tips">
+        <div class="tip"><b>Bring real numbers</b><p>How many people, how much money, how much time you saved. If it's a guess, say so, and Claude will phrase it carefully.</p></div>
+        <div class="tip"><b>One job at a time</b><p>Each listing gets its own version. Paste a new listing and start again: it takes less time the second time.</p></div>
+        <div class="tip"><b>Push back</b><p>If a line doesn't sound like you, say so and give your version. Your words win.</p></div>
+        <div class="tip"><b>Use the cover letter</b><p>It covers what a resume can't, like a gap or a career change, in your voice.</p></div>
+        <div class="tip"><b>Fix LinkedIn too</b><p>Recruiters compare your resume with your profile. Claude tells you what to change at the end.</p></div>
+        <div class="tip"><b>Read the final PDF once</b><p>Check names, dates and numbers before you send it.</p></div>
+      </div>
+    </div>
+    <div class="he">
+      <h2>איך להוציא מזה את המקסימום</h2>
+      <p class="sub">מה שעושה את ההבדל בין קורות חיים בסדר לקורות חיים חזקים.</p>
+      <div class="tips">
+        <div class="tip"><b>תביאו מספרים אמיתיים</b><p>כמה אנשים, כמה כסף, כמה זמן חסכתם. אם זו הערכה, תגידו, ו-Claude ינסח את זה בזהירות.</p></div>
+        <div class="tip"><b>משרה אחת בכל פעם</b><p>כל מודעה מקבלת גרסה משלה. מדביקים מודעה חדשה ומתחילים שוב: בפעם השנייה זה הולך מהר יותר.</p></div>
+        <div class="tip"><b>אל תתביישו לתקן</b><p>אם משפט לא נשמע כמוכם, תגידו ותכתבו את הגרסה שלכם. הניסוח שלכם קובע.</p></div>
+        <div class="tip"><b>תשתמשו במכתב הפנייה</b><p>הוא מסביר את מה שקורות חיים לא יכולים, כמו הפסקה בקריירה או מעבר תחום, בקול שלכם.</p></div>
+        <div class="tip"><b>תעדכנו גם את לינקדאין</b><p>מגייסים משווים בין קורות החיים לפרופיל. בסוף Claude אומר לכם מה לשנות.</p></div>
+        <div class="tip"><b>תקראו את ה-PDF פעם אחת</b><p>בודקים שמות, תאריכים ומספרים לפני ששולחים.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="en">
+      <h2>Questions</h2>
+      <details><summary>Is it free?</summary><p>Yes, RezuMatch is free. You need a Claude account, and your Claude plan needs to support Skills or plugins.</p></details>
+      <details><summary>Will it make things up to impress the recruiter?</summary><p>No. Every number, title and claim has to come from you. In the desktop app, a built-in check stops the PDF if something in the draft didn't come from you, and Claude asks you about it.</p></details>
+      <details><summary>Is my resume safe?</summary><p>Your resume and answers go to Claude to do the work, like any message you send Claude. RezuMatch sends nothing anywhere else. In the desktop app, your files stay in a folder on your computer.</p></details>
+      <details><summary>Does a high score guarantee an interview?</summary><p>No. The score is an estimate: real hiring systems differ, and a person makes the decision. Use it to find what's missing.</p></details>
+      <details><summary>Can I use it in Hebrew?</summary><p>Yes. Talk to it in Hebrew or English. The resume follows the language of the job listing, and Hebrew resumes come out right-to-left.</p></details>
+      <details><summary>I don't have a resume or a LinkedIn profile.</summary><p>That's fine. Choose "I don't have a resume yet" and it builds one with you, one question at a time.</p></details>
+      <details><summary>Something doesn't work.</summary><p><a href="https://github.com/Aha85/rezumatch/issues" target="_blank" rel="noopener">Report it here</a> with what you did and what you saw. Please don't attach your real resume.</p></details>
+    </div>
+    <div class="he">
+      <h2>שאלות</h2>
+      <details><summary>זה בחינם?</summary><p>כן, RezuMatch חינמי. צריך חשבון Claude, ומנוי שתומך ב-Skills או בתוספים.</p></details>
+      <details><summary>הוא ימציא דברים כדי להרשים את המגייס?</summary><p>לא. כל מספר, תואר וטענה חייבים להגיע מכם. באפליקציה למחשב יש בדיקה מובנית שעוצרת את ה-PDF אם משהו בטיוטה לא הגיע מכם, ו-Claude שואל אתכם עליו.</p></details>
+      <details><summary>קורות החיים שלי בטוחים?</summary><p>קורות החיים והתשובות שלכם נשלחים ל-Claude כדי לבצע את העבודה, כמו כל הודעה שאתם שולחים ל-Claude. RezuMatch לא שולח שום דבר לשום מקום אחר. באפליקציה למחשב הקבצים נשמרים בתיקייה אצלכם.</p></details>
+      <details><summary>ציון גבוה מבטיח ראיון?</summary><p>לא. הציון הוא הערכה: מערכות גיוס שונות זו מזו, ובסוף בן אדם מחליט. משתמשים בו כדי לגלות מה חסר.</p></details>
+      <details><summary>אפשר לעבוד בעברית?</summary><p>כן. מדברים איתו בעברית או באנגלית. קורות החיים נכתבים בשפה של המודעה, וקורות חיים בעברית יוצאים מימין לשמאל.</p></details>
+      <details><summary>אין לי קורות חיים ואין לי לינקדאין.</summary><p>זה בסדר. בוחרים "אין לי עדיין קורות חיים", והוא בונה אותם איתכם, שאלה אחרי שאלה.</p></details>
+      <details><summary>משהו לא עובד.</summary><p><a href="https://github.com/Aha85/rezumatch/issues" target="_blank" rel="noopener">מדווחים כאן</a> מה עשיתם ומה ראיתם. בבקשה לא לצרף קורות חיים אמיתיים.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="en">
+      <div class="links"><span>Made by <a href="https://www.dannyshaket.com" target="_blank" rel="noopener">Danny Shaket</a></span><a href="https://github.com/Aha85/rezumatch" target="_blank" rel="noopener">GitHub</a><span>MIT license</span></div>
+      <p>RezuMatch helps with writing and formatting. It isn't professional career, legal or immigration advice. Check that everything in your resume is true before you send it.</p>
+    </div>
+    <div class="he">
+      <div class="links"><span>נוצר על ידי <a href="https://www.dannyshaket.com" target="_blank" rel="noopener">דני שקט</a></span><a href="https://github.com/Aha85/rezumatch" target="_blank" rel="noopener">GitHub</a><span>רישיון MIT</span></div>
+      <p>RezuMatch עוזר בניסוח ובעיצוב. הוא לא ייעוץ מקצועי בתחום הקריירה, המשפט או ההגירה. לפני ששולחים, בודקים שכל מה שכתוב בקורות החיים נכון.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    function setLang(l) {
+      root.setAttribute("data-lang", l);
+      root.lang = l;
+      root.dir = l === "he" ? "rtl" : "ltr";
+      document.querySelectorAll(".langs button").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.set === l));
+      });
+      document.title = l === "he" ? "RezuMatch - מתאימים את קורות החיים למשרה" : "RezuMatch - fit your resume to the job you want";
+      try { localStorage.setItem("rm-lang", l); } catch (e) {}
+    }
+    var q = new URLSearchParams(location.search).get("lang");
+    var saved = null;
+    try { saved = localStorage.getItem("rm-lang"); } catch (e) {}
+    var guess = (navigator.language || "").toLowerCase().indexOf("he") === 0 ? "he" : "en";
+    setLang(q === "he" || q === "en" ? q : saved || guess);
+    document.querySelectorAll(".langs button").forEach(function (b) {
+      b.addEventListener("click", function () { setLang(b.dataset.set); });
+    });
+    document.querySelectorAll("[data-copy]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var text = b.parentElement.querySelector("code").textContent;
+        var label = b.textContent;
+        (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () {
+          b.textContent = root.lang === "he" ? "הועתק" : "Copied";
+          b.classList.add("done");
+          setTimeout(function () { b.textContent = label; b.classList.remove("done"); }, 1600);
+        }).catch(function () {});
+      });
+    });
+  })();
+</script>
+</body>
+</html>

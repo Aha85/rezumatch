@@ -1,0 +1,15 @@
+{
+  "name": "rezumatch",
+  "owner": {
+    "name": "Danny Shaket",
+    "url": "https://www.dannyshaket.com"
+  },
+  "plugins": [
+    {
+      "name": "rezumatch",
+      "source": "./",
+      "description": "Tailor your resume and cover letter to a job listing, ATS-ready, with an estimated match score. English and Hebrew.",
+      "version": "1.0.0"
+    }
+  ]
+}

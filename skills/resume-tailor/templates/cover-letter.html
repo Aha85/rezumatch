@@ -1,0 +1,53 @@
+<!doctype html>
+<!--
+  resume-helper template: COVER LETTER (PDF upload version)
+  - Copy the header (h1, .headline, .contact) and the CSS variables from the resume the user chose, so both read as one set.
+  - Date: "17 November 2026" (English) / "17.11.2026" (Hebrew). Subject: job title, company.
+  - Greeting: "Dear [Company] hiring team," when no name is known.
+  - Body: one theme per paragraph, linked to the one before; at most one paragraph starts with "I".
+  - Bold the 3-5 numbers the reader must not miss. Typed name in the accent color. No handwritten signature by default.
+  - For a text box (LinkedIn Easy Apply without upload), give plain text in a code block instead of this file.
+-->
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>[Full Name] - Cover Letter</title>
+<style>
+  @page { size: A4; margin: 14mm 20mm 14mm 20mm; }
+  :root { --accent:#1A1A1A; --ink:#1A1A1A; --ink-soft:#5C5C5C; --rule:#D0D0D0;
+          --font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:var(--ink); font-family:var(--font); font-size:10.8pt; line-height:1.55; }
+  h1 { margin:0; color:var(--accent); font-size:20pt; line-height:1.1; font-weight:700; }
+  .headline { margin:2pt 0 0; font-size:10.5pt; font-weight:700; }
+  .contact { margin:3pt 0 0; padding-bottom:8pt; border-bottom:1px solid var(--rule); display:flex; flex-wrap:wrap; gap:4pt 16pt; color:var(--ink-soft); font-size:8.8pt; }
+  .contact a { white-space:nowrap; color:var(--ink-soft); text-decoration:none; display:inline-flex; align-items:center; gap:4pt; }
+  .contact svg { width:14px; height:14px; flex:none; color:var(--accent); }
+  .date { margin:18pt 0 0; color:var(--ink-soft); font-size:10pt; }
+  .subject { margin:6pt 0 16pt; font-size:13pt; font-weight:700; }
+  p { margin:0 0 10pt; }
+  a.inline { color:var(--accent); font-weight:700; text-decoration:underline; }
+  .sign { margin-top:18pt; color:var(--accent); font-weight:700; }
+  /* Hebrew / RTL: no letter spacing in Hebrew, keep numbers, dates and links left-to-right */
+  :lang(he) h2, [dir="rtl"] h2 { letter-spacing:0; }
+  .contact a, .dates, bdi { direction:ltr; unicode-bidi:isolate; }
+</style>
+</head>
+<body>
+  <h1>[Full Name]</h1>
+  <p class="headline">[Same positioning line as the resume]</p>
+  <p class="contact">[Copy the four contact links from the resume]</p>
+
+  <p class="date">[17 November 2026]</p>
+  <p class="subject">[Job Title], [Company]</p>
+
+  <p>Dear [Company] hiring team,</p>
+  <p>[Why this role: what it asks for, and that this is the work you do.]</p>
+  <p>[Proof 1, with one number in bold.]</p>
+  <p>[Proof 2, linked to proof 1.]</p>
+  <p>[Earlier experience that still matters.]</p>
+  <p>[Close: offer an approach, not a ready solution.]</p>
+
+  <p class="sign">[Full Name]</p>
+</body>
+</html>
