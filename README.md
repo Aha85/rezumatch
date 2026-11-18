@@ -32,9 +32,9 @@ No Python? It still works: Claude scores by hand and gives you the resume as a w
 ```
 Then type `/tailor` (or just say "help me fit my resume to this job").
 
-### claude.ai
-1. Download `resume-tailor.zip` from [the RezuMatch page](https://www.dannyshaket.com/en/creations/rezumatch).
-2. In claude.ai: Settings, Capabilities, Skills, Upload skill.
+### claude.ai or the Claude app
+1. Download `rezumatch-plugin.zip` from [the RezuMatch page](https://www.dannyshaket.com/en/creations/rezumatch).
+2. Click Customize on the left, open the Plugins tab, then + Add, Upload plugin, and choose the file.
 3. Start a chat: "Help me fit my resume to this job".
 
 On claude.ai the two automatic checks (invented facts, file names) don't run as hooks. Claude still follows the same rules from the skill.

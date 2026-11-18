@@ -33,8 +33,8 @@
 אחר כך כותבים `/tailor`, או פשוט "תעזור לי להתאים את קורות החיים למשרה הזו".
 
 ### claude.ai
-1. מורידים את `resume-tailor.zip` מ[עמוד RezuMatch](https://www.dannyshaket.com/creations/rezumatch).
-2. ב-claude.ai: Settings, ‏Capabilities, ‏Skills, ‏Upload skill.
+1. מורידים את `rezumatch-plugin.zip` מ[עמוד RezuMatch](https://www.dannyshaket.com/creations/rezumatch).
+2. לוחצים על Customize בצד, עוברים ללשונית Plugins, ואז ‎+ Add ‏ו-Upload plugin, ובוחרים את הקובץ.
 3. פותחים שיחה: "תעזור לי להתאים את קורות החיים למשרה הזו".
 
 ב-claude.ai שתי הבדיקות האוטומטיות (המצאת עובדות, שמות קבצים) לא רצות. Claude עדיין עובד לפי אותם כללים.
