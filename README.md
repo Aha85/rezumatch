@@ -9,7 +9,7 @@ A free Claude plugin that fits your resume to one specific job listing, step by 
 - **Your design:** clean built-in templates, or your own Claude design system
 - **English and Hebrew** (full right-to-left support)
 
-**Step-by-step guide for everyone: [dannyshaket.com/creations/rezumatch](https://www.dannyshaket.com/creations/rezumatch)**
+**Step-by-step guide for everyone: [dannyshaket.com/en/creations/rezumatch](https://www.dannyshaket.com/en/creations/rezumatch)**
 
 [עברית](README.he.md)
 
@@ -33,7 +33,7 @@ No Python? It still works: Claude scores by hand and gives you the resume as a w
 Then type `/tailor` (or just say "help me fit my resume to this job").
 
 ### claude.ai
-1. Download `resume-tailor.zip` from [the RezuMatch page](https://www.dannyshaket.com/creations/rezumatch).
+1. Download `resume-tailor.zip` from [the RezuMatch page](https://www.dannyshaket.com/en/creations/rezumatch).
 2. In claude.ai: Settings, Capabilities, Skills, Upload skill.
 3. Start a chat: "Help me fit my resume to this job".
 

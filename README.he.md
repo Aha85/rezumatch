@@ -11,7 +11,7 @@
 - **העיצוב שלך:** תבניות נקיות מובנות, או מערכת העיצוב שלך ב-Claude
 - **עברית ואנגלית**, כולל תמיכה מלאה מימין לשמאל
 
-**מדריך צעד אחר צעד לכולם: [dannyshaket.com/creations/rezumatch](https://www.dannyshaket.com/creations/rezumatch?lang=he)**
+**מדריך צעד אחר צעד לכולם: [dannyshaket.com/creations/rezumatch](https://www.dannyshaket.com/creations/rezumatch)**
 
 ## מה צריך
 - Claude: Claude Code, אפליקציית Claude למחשב, או claude.ai
@@ -33,7 +33,7 @@
 אחר כך כותבים `/tailor`, או פשוט "תעזור לי להתאים את קורות החיים למשרה הזו".
 
 ### claude.ai
-1. מורידים את `resume-tailor.zip` מ[עמוד RezuMatch](https://www.dannyshaket.com/creations/rezumatch?lang=he).
+1. מורידים את `resume-tailor.zip` מ[עמוד RezuMatch](https://www.dannyshaket.com/creations/rezumatch).
 2. ב-claude.ai: Settings, ‏Capabilities, ‏Skills, ‏Upload skill.
 3. פותחים שיחה: "תעזור לי להתאים את קורות החיים למשרה הזו".
 
