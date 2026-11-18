@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RezuMatch - fit your resume to the job you want</title>
-<meta name="description" content="A free add-on for Claude that fits your resume to one job listing, step by step, with an estimated ATS score. English and Hebrew.">
+<title>RezuMatch - a resume built for the first screen</title>
+<meta name="description" content="A free add-on for Claude that tailors your resume to one job listing using the principles ATS screening software works by. Estimated score, no invented facts, English and Hebrew.">
 <meta name="theme-color" content="#0B1420">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -313,6 +313,12 @@
   .js .rv { opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); transition-delay:calc(var(--i,0) * 70ms); }
   .js section.in .rv, .js .hero.in .rv { opacity:1; transform:none; }
   @media (prefers-reduced-motion: reduce) { .js .rv { opacity:1; transform:none; } }
+  .rules { list-style:none; margin:0; padding:0; }
+  .rules li { padding:14px 0; border-top:1px solid var(--chalk-15); }
+  .rules li:first-child { border-top:0; padding-top:0; }
+  .rules b { display:block; font-family:var(--display); font-size:20px; font-weight:700; }
+  .rules span { color:var(--chalk-70); font-size:16px; }
+  .note-ats { margin-top:18px; padding-top:16px; border-top:2px solid var(--magenta); color:var(--chalk); font-size:16px; }
 </style>
 </head>
 <body>
@@ -339,27 +345,29 @@
   <div class="wrap hero">
     <div>
       <div class="en">
-        <h1>Your resume, fitted to <span>the job you want.</span></h1>
-        <p class="lead">A free add-on for Claude. Give it your resume and one job listing. It asks you simple questions, one at a time, and hands you a one-page PDF that hiring software can read and recruiters want to.</p>
+        <h1>A resume built for <span>the screen before the human.</span></h1>
+        <p class="lead">Most companies run resumes through screening software (an ATS) before anyone reads them. RezuMatch is a free add-on for Claude that works by the same principles: it tailors your resume to one job listing so the software can read it and finds the job's words in it. That improves your chances of reaching a person. Nobody can promise it.</p>
         <div class="ctas">
           <a class="btn solid" href="#install">Install it, free <svg class="dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn line" href="#how">See how it works</a>
         </div>
         <div class="proof">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Score before and after</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Built on ATS screening principles</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Estimated score before and after</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Never makes things up</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>English and Hebrew</span>
         </div>
       </div>
       <div class="he">
-        <h1>קורות החיים שלכם, מותאמים <span>למשרה שאתם רוצים.</span></h1>
-        <p class="lead">תוסף חינמי ל-Claude. נותנים לו את קורות החיים ומשרה אחת. הוא שואל שאלות פשוטות, אחת בכל פעם, ומחזיר לכם PDF בעמוד אחד שמערכות הגיוס יודעות לקרוא ושמגייסים ירצו לקרוא.</p>
+        <h1>קורות חיים שבנויים <span>לסינון שלפני המגייס.</span></h1>
+        <p class="lead">ברוב החברות קורות החיים עוברים קודם דרך תוכנת סינון (ATS), ורק אחר כך מגיעים לבן אדם. RezuMatch הוא תוסף חינמי ל-Claude שעובד לפי אותם עקרונות: הוא מתאים את קורות החיים למשרה אחת, כך שהתוכנה תצליח לקרוא אותם ותמצא בהם את המילים של המשרה. זה משפר את הסיכוי שלכם להגיע לבן אדם. להבטיח את זה אף אחד לא יכול.</p>
         <div class="ctas">
           <a class="btn solid" href="#install">להתקנה, בחינם <svg class="dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn line" href="#how">איך זה עובד</a>
         </div>
         <div class="proof">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>ציון לפני ואחרי</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>בנוי לפי עקרונות סינון ATS</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>ציון משוער לפני ואחרי</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>לא ממציא כלום</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>עברית ואנגלית</span>
         </div>
@@ -392,11 +400,24 @@
   <!-- WHY -->
   <section>
     <div class="wrap why">
-      <div class="en"><h2 class="big">Most resumes are read by software first. <em>If it can't find the job's words in yours, a person may never see it.</em></h2></div>
-      <div class="he"><h2 class="big">את רוב קורות החיים קוראת קודם תוכנה. <em>אם היא לא מוצאת בהם את המילים של המשרה, יכול להיות שאף אחד לא יראה אותם.</em></h2></div>
+      <div class="en"><h2 class="big">Before a person reads your resume, software usually screens it. <em>RezuMatch works by the rules that screening runs on.</em></h2></div>
+      <div class="he"><h2 class="big">לפני שבן אדם קורא את קורות החיים, בדרך כלל תוכנה מסננת אותם. <em>RezuMatch עובד לפי הכללים שהסינון הזה עובד לפיהם.</em></h2></div>
       <div>
-        <div class="en txt"><p>That software is called an ATS (applicant tracking system). It also struggles with two columns, tables and sidebars.</p><p>RezuMatch fixes the words and the layout, using only what's true about you, and shows you a score so you can see the difference.</p></div>
-        <div class="he txt"><p>התוכנה הזו נקראת ATS (מערכת לניהול מועמדים). היא גם מתקשה עם שתי עמודות, טבלאות ופסי צד.</p><p>RezuMatch מתקן את המילים ואת העיצוב, רק עם מה שנכון לגביכם, ומראה לכם ציון כדי שתראו את ההבדל.</p></div>
+        <ul class="rules en">
+          <li><b>A layout the software can read</b><span>One column. No tables, sidebars or text inside images, so nothing gets lost or read out of order.</span></li>
+          <li><b>The job's own words</b><span>The skills and terms from the listing, used only where they're true for you.</span></li>
+          <li><b>Standard sections</b><span>Summary, Experience, Skills, Education: the headings screening software looks for.</span></li>
+          <li><b>Clear proof</b><span>Real titles, years and numbers, as plain text.</span></li>
+        </ul>
+        <ul class="rules he">
+          <li><b>עיצוב שהתוכנה יודעת לקרוא</b><span>עמודה אחת. בלי טבלאות, פסי צד או טקסט בתוך תמונות, כדי ששום דבר לא ילך לאיבוד או ייקרא בסדר הלא נכון.</span></li>
+          <li><b>המילים של המשרה</b><span>הכישורים והמונחים מהמודעה, רק איפה שהם נכונים לגביכם.</span></li>
+          <li><b>סעיפים סטנדרטיים</b><span>תקציר, ניסיון, כישורים, השכלה: הכותרות שתוכנות סינון מחפשות.</span></li>
+          <li><b>הוכחות ברורות</b><span>תפקידים, שנים ומספרים אמיתיים, כטקסט פשוט.</span></li>
+        </ul>
+        <p class="note-ats en">This improves your chances of passing the first screen. It can't guarantee it: every company sets up its system differently, and in the end a person decides.</p>
+        <p class="note-ats he">זה משפר את הסיכוי לעבור את הסינון הראשוני. זה לא יכול להבטיח אותו: כל חברה מגדירה את המערכת שלה אחרת, ובסוף בן אדם מחליט.</p>
+      </div>
       </div>
     </div>
   </section>
@@ -556,6 +577,7 @@
         <details><summary>Is it free?</summary><p>Yes, RezuMatch is free. You need a Claude account, and your Claude plan needs to support Skills or plugins.</p></details>
         <details><summary>Will it make things up to impress the recruiter?</summary><p>No. Every number, title and claim has to come from you. In the Claude app, a built-in check stops the PDF if something in the draft didn't come from you, and Claude asks you about it.</p></details>
         <details><summary>Is my resume safe?</summary><p>Your resume and answers go to Claude to do the work, like any message you send Claude. RezuMatch sends nothing anywhere else. In the Claude app, your files stay in a folder on your computer.</p></details>
+        <details><summary>Will it get me past the ATS?</summary><p>It improves your chances, but no one can promise it. Every company sets up its screening differently: which words it looks for, which questions filter out candidates, and how a recruiter searches. RezuMatch makes sure your resume can be read and that it speaks the job's language, using only what's true about you.</p></details>
         <details><summary>Does a high score guarantee an interview?</summary><p>No. The score is an estimate: hiring systems differ, and a person makes the decision. Use it to find what's missing.</p></details>
         <details><summary>Can I use it in Hebrew?</summary><p>Yes. Talk to it in Hebrew or English. The resume follows the language of the job listing, and Hebrew resumes come out right to left.</p></details>
         <details><summary>I don't have a resume or a LinkedIn profile.</summary><p>That's fine. Choose "I don't have a resume yet" and it builds one with you, one question at a time.</p></details>
@@ -565,6 +587,7 @@
         <details><summary>זה בחינם?</summary><p>כן, RezuMatch חינמי. צריך חשבון Claude, ומנוי שתומך ב-Skills או בתוספים.</p></details>
         <details><summary>הוא ימציא דברים כדי להרשים את המגייס?</summary><p>לא. כל מספר, תואר וטענה חייבים להגיע מכם. באפליקציית Claude יש בדיקה מובנית שעוצרת את ה-PDF אם משהו בטיוטה לא הגיע מכם, ו-Claude שואל אתכם עליו.</p></details>
         <details><summary>קורות החיים שלי בטוחים?</summary><p>קורות החיים והתשובות שלכם נשלחים ל-Claude כדי לבצע את העבודה, כמו כל הודעה שאתם שולחים ל-Claude. RezuMatch לא שולח שום דבר לשום מקום אחר. באפליקציה הקבצים נשמרים בתיקייה אצלכם.</p></details>
+        <details><summary>זה יעביר אותי את ה-ATS?</summary><p>זה משפר את הסיכוי, אבל אף אחד לא יכול להבטיח את זה. כל חברה מגדירה את הסינון שלה אחרת: אילו מילים היא מחפשת, אילו שאלות מסננות מועמדים, ואיך המגייס מחפש. RezuMatch דואג שקורות החיים יהיו קריאים וידברו בשפה של המשרה, רק עם מה שנכון לגביכם.</p></details>
         <details><summary>ציון גבוה מבטיח ראיון?</summary><p>לא. הציון הוא הערכה: מערכות גיוס שונות זו מזו, ובסוף בן אדם מחליט. משתמשים בו כדי לגלות מה חסר.</p></details>
         <details><summary>אפשר לעבוד בעברית?</summary><p>כן. מדברים איתו בעברית או באנגלית. קורות החיים נכתבים בשפה של המודעה, וקורות חיים בעברית יוצאים מימין לשמאל.</p></details>
         <details><summary>אין לי קורות חיים ואין לי לינקדאין.</summary><p>זה בסדר. בוחרים "אין לי עדיין קורות חיים", והוא בונה אותם איתכם, שאלה אחרי שאלה.</p></details>
@@ -610,7 +633,7 @@
   function setLang(l) {
     root.setAttribute("data-lang", l); root.lang = l; root.dir = l === "he" ? "rtl" : "ltr";
     document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.set === l)); });
-    document.title = l === "he" ? "RezuMatch - קורות חיים מותאמים למשרה שאתם רוצים" : "RezuMatch - fit your resume to the job you want";
+    document.title = l === "he" ? "RezuMatch - קורות חיים שבנויים לסינון הראשוני" : "RezuMatch - a resume built for the first screen";
     try { localStorage.setItem("rm-lang", l); } catch (e) {}
   }
   var q = new URLSearchParams(location.search).get("lang"), saved = null;
@@ -659,7 +682,7 @@
   addEventListener("scroll", onScroll, { passive:true }); onScroll();
 
   // reveal on scroll: whole sections, so hidden languages and tabs never get stuck
-  var revealSel = ".sec-head > *, .why > div, .need li, .choice, .tally-host, .steps > li, .help, .video, .flow li, .tips > div, .faq details, .maker > *";
+  var revealSel = ".sec-head > *, .why h2, .rules li, .note-ats, .need li, .choice, .tally-host, .steps > li, .help, .video, .flow li, .tips > div, .faq details, .maker > *";
   document.querySelectorAll("section").forEach(function (sec) {
     var n = 0;
     sec.querySelectorAll(revealSel).forEach(function (el) { el.classList.add("rv"); el.style.setProperty("--i", Math.min(n++, 8)); });
