@@ -673,13 +673,13 @@
     document.querySelectorAll("section").forEach(function (sec) { sec.classList.add("in"); });
   }
 
-  // hero video: the score and gains follow the magenta beam (3.0s to 4.5s in the clip)
+  // hero video: the score and gains follow the change (3.5s to 4.6s in the clip)
   var vid = document.getElementById("hero-video"), vs = document.querySelector(".vs"), gains = document.querySelectorAll(".viz-gains li");
   var from = +vs.dataset.from, to = +vs.dataset.to;
   function sync() {
-    var t = vid.currentTime, k = Math.max(0, Math.min(1, (t - 3.0) / 1.5)), e = 1 - Math.pow(1 - k, 3);
+    var t = vid.currentTime, k = Math.max(0, Math.min(1, (t - 3.5) / 1.1)), e = 1 - Math.pow(1 - k, 3);
     vs.textContent = Math.round(from + (to - from) * e);
-    gains.forEach(function (g, i) { g.classList.toggle("on", t >= 3.4 + i * 0.5); });
+    gains.forEach(function (g, i) { g.classList.toggle("on", t >= 3.8 + i * 0.4); });
     if (!vid.paused && !vid.ended) requestAnimationFrame(sync);
   }
   function runViz() {
