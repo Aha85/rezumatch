@@ -32,7 +32,7 @@
 ```
 אחר כך כותבים `/tailor`, או פשוט "תעזור לי להתאים את קורות החיים למשרה הזו".
 
-### claude.ai
+### claude.ai או אפליקציית Claude
 1. מורידים את `rezumatch-plugin.zip` מ[עמוד RezuMatch](https://www.dannyshaket.com/creations/rezumatch).
 2. לוחצים על Customize בצד, עוברים ללשונית Plugins, ואז ‎+ Add ‏ו-Upload plugin, ובוחרים את הקובץ.
 3. פותחים שיחה: "תעזור לי להתאים את קורות החיים למשרה הזו".
