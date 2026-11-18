@@ -319,6 +319,43 @@
   .rules b { display:block; font-family:var(--display); font-size:20px; font-weight:700; }
   .rules span { color:var(--chalk-70); font-size:16px; }
   .note-ats { margin-top:18px; padding-top:16px; border-top:2px solid var(--magenta); color:var(--chalk); font-size:16px; }
+
+  /* ===== Full-width film hero ===== */
+  .film { position:relative; height:calc(100vh - 64px); min-height:620px; max-height:960px; overflow:hidden; background:var(--navy); }
+  .film-video { position:absolute; top:50%; right:0; left:auto; width:78%; height:auto; aspect-ratio:16/9; translate:0 -50%; object-fit:cover; object-position:50% 50%; transform:scale(1.04); transition:transform 6s var(--ease);
+    -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); mask-image:radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); }
+  [dir="rtl"] .film-video { right:auto; left:0; }
+  .film.revealed .film-video { transform:scale(1); }
+  .film-shade { position:absolute; inset:0; pointer-events:none; background:linear-gradient(0deg, rgba(11,20,32,.9) 0%, rgba(11,20,32,0) 20%); opacity:0; transition:opacity 1.2s var(--ease); }
+  .film.revealed .film-shade { opacity:1; }
+  .film .hero { position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:0 28px 70px; grid-template-columns:none; }
+  .film .hero > div { max-width:min(540px, 42%); }
+  [dir="rtl"] .film .hero { align-items:flex-start; }
+  .film .hero h1 { font-size:clamp(40px, 4.6vw, 72px); }
+  .film .hero .lead { font-size:17.5px; margin-top:20px; }
+  .js .film .hero h1, .js .film .hero .lead, .js .film .hero .ctas, .js .film .hero .proof, .js .film-bar { opacity:0; transform:translateY(26px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
+  .js .film .hero .lead { transition-delay:.12s; } .js .film .hero .ctas { transition-delay:.24s; } .js .film .hero .proof { transition-delay:.36s; } .js .film-bar { transition-delay:.5s; }
+  .film.revealed .hero h1, .film.revealed .hero .lead, .film.revealed .hero .ctas, .film.revealed .hero .proof, .film.revealed .film-bar { opacity:1 !important; transform:none !important; }
+  .film-bar { position:absolute; left:0; right:0; bottom:22px; z-index:2; display:flex; align-items:center; gap:24px; font-size:13px; color:var(--chalk-50); }
+  .film-bar .viz-score { font-size:14px; color:var(--chalk-70); white-space:nowrap; }
+  .film-bar .viz-score .vs { font-size:30px; }
+  .film-bar .replay { margin:0 0 0 auto; }
+  [dir="rtl"] .film-bar .replay { margin:0 auto 0 0; }
+  .film-cue { position:absolute; left:50%; bottom:26px; z-index:2; transform:translateX(-50%); width:22px; height:34px; border:2px solid var(--chalk-50); border-radius:12px; opacity:.8; transition:opacity .6s; }
+  .film-cue::after { content:""; position:absolute; left:50%; top:6px; width:3px; height:7px; margin-left:-1.5px; background:var(--magenta); border-radius:2px; animation:cue 1.6s var(--ease) infinite; }
+  @keyframes cue { 0% { transform:translateY(0); opacity:1; } 80% { transform:translateY(11px); opacity:0; } 100% { opacity:0; } }
+  .film.revealed .film-cue { opacity:0; }
+  @media (max-width:900px) {
+    .film { height:auto; min-height:0; max-height:none; background:var(--navy); }
+    .film-video, [dir="rtl"] .film-video { position:relative; top:auto; translate:none; width:100%; height:auto; aspect-ratio:16/9; transform:none; -webkit-mask-image:none; mask-image:none; }
+    .film .hero > div { max-width:none; }
+    .film-shade { display:none; }
+    .film .hero { height:auto; padding:32px 20px 24px; }
+    .film-bar { position:static; padding:0 20px 40px; flex-wrap:wrap; gap:8px 16px; }
+    .film-cue { display:none; }
+    .js .film .hero h1, .js .film .hero .lead, .js .film .hero .ctas, .js .film .hero .proof, .js .film-bar { opacity:1; transform:none; transition:none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .js .film .hero h1, .js .film .hero .lead, .js .film .hero .ctas, .js .film .hero .proof, .js .film-bar { opacity:1; transform:none; } .film-shade { opacity:1; } }
 </style>
 </head>
 <body>
@@ -331,7 +368,7 @@
     <nav>
       <a class="hide-s" href="#install"><span class="en">Install</span><span class="he">התקנה</span></a>
       <a class="hide-s" href="#faq"><span class="en">Questions</span><span class="he">שאלות</span></a>
-      <a href="https://www.dannyshaket.com" target="_blank" rel="noopener">dannyshaket.com</a>
+      <a class="hide-s" href="https://www.dannyshaket.com" target="_blank" rel="noopener">dannyshaket.com</a>
       <div class="lang" role="group" aria-label="Language">
         <button type="button" data-set="en" aria-pressed="true">EN</button>
         <button type="button" data-set="he" aria-pressed="false">עב</button>
@@ -341,12 +378,17 @@
 </header>
 
 <main id="top">
-  <!-- HERO -->
-  <div class="wrap hero">
-    <div>
+  <!-- HERO: full-width film, copy reveals when the new resume lands -->
+  <div class="film" id="film">
+    <video id="hero-video" class="film-video" muted playsinline preload="auto" poster="media/hero-start.jpg" aria-label="An old crumpled resume spins and turns into a clean one-page resume">
+      <source src="media/hero.webm" type="video/webm">
+      <source src="media/hero.mp4" type="video/mp4">
+    </video>
+    <div class="film-shade" aria-hidden="true"></div>
+    <div class="wrap film-copy hero">
       <div class="en">
         <h1>A resume built for <span>the screen before the human.</span></h1>
-        <p class="lead">Most companies run resumes through screening software (an ATS) before anyone reads them. RezuMatch is a free add-on for Claude that works by the same principles: it tailors your resume to one job listing so the software can read it and finds the job's words in it. That improves your chances of reaching a person. Nobody can promise it.</p>
+        <p class="lead">Most companies screen resumes with software (an ATS) before anyone reads them. RezuMatch, a free add-on for Claude, tailors yours to one job listing by the same principles, to improve your chances of reaching a person. No promises, no made-up facts.</p>
         <div class="ctas">
           <a class="btn solid" href="#install">Install it, free <svg class="dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn line" href="#how">See how it works</a>
@@ -360,7 +402,7 @@
       </div>
       <div class="he">
         <h1>קורות חיים שבנויים <span>לסינון שלפני המגייס.</span></h1>
-        <p class="lead">ברוב החברות קורות החיים עוברים קודם דרך תוכנת סינון (ATS), ורק אחר כך מגיעים לבן אדם. RezuMatch הוא תוסף חינמי ל-Claude שעובד לפי אותם עקרונות: הוא מתאים את קורות החיים למשרה אחת, כך שהתוכנה תצליח לקרוא אותם ותמצא בהם את המילים של המשרה. זה משפר את הסיכוי שלכם להגיע לבן אדם. להבטיח את זה אף אחד לא יכול.</p>
+        <p class="lead">ברוב החברות תוכנה (ATS) מסננת את קורות החיים לפני שבן אדם קורא אותם. RezuMatch, תוסף חינמי ל-Claude, מתאים את שלכם למשרה אחת לפי אותם עקרונות, כדי לשפר את הסיכוי שלכם להגיע לבן אדם. בלי הבטחות ובלי עובדות מומצאות.</p>
         <div class="ctas">
           <a class="btn solid" href="#install">להתקנה, בחינם <svg class="dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn line" href="#how">איך זה עובד</a>
@@ -373,27 +415,11 @@
         </div>
       </div>
     </div>
-
-    <div class="hero-viz">
-      <div class="stage" id="stage">
-        <video id="hero-video" muted playsinline preload="auto" poster="media/hero-start.jpg" aria-label="A messy resume turns into a clean one-page resume">
-          <source src="media/hero.webm" type="video/webm">
-          <source src="media/hero.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="viz-foot">
-        <div class="viz-score"><span class="en">Estimated match</span><span class="he">התאמה משוערת</span> <b class="vs" data-from="48" data-to="87">48</b><span class="of">/100</span></div>
-        <ul class="viz-gains">
-          <li><span class="en">One clean column</span><span class="he">עמודה אחת נקייה</span></li>
-          <li><span class="en">The job's words, where true</span><span class="he">המילים של המשרה, איפה שזה נכון</span></li>
-          <li><span class="en">Every fact from you</span><span class="he">כל עובדה מגיעה מכם</span></li>
-        </ul>
-      </div>
-      <div class="viz-meta">
-        <span class="en">Illustration with a made-up resume. Your result depends on your real experience.</span>
-        <span class="he">המחשה עם קורות חיים בדויים. התוצאה שלכם תלויה בניסיון האמיתי שלכם.</span>
-        <button type="button" class="replay" id="viz-replay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span class="en">Replay</span><span class="he">שוב</span></button>
-      </div>
+    <div class="film-bar wrap">
+      <div class="viz-score"><span class="en">Estimated match</span><span class="he">התאמה משוערת</span> <b class="vs" data-from="48" data-to="87">48</b><span class="of">/100</span></div>
+      <span class="film-note en">Illustration with a made-up resume. Your result depends on your real experience.</span>
+      <span class="film-note he">המחשה עם קורות חיים בדויים. התוצאה שלכם תלויה בניסיון האמיתי שלכם.</span>
+      <button type="button" class="replay" id="viz-replay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span class="en">Replay</span><span class="he">שוב</span></button>
     </div>
   </div>
 
@@ -696,28 +722,30 @@
     document.querySelectorAll("section").forEach(function (sec) { sec.classList.add("in"); });
   }
 
-  // hero video: the score and gains follow the change (3.5s to 4.6s in the clip)
-  var vid = document.getElementById("hero-video"), vs = document.querySelector(".vs"), gains = document.querySelectorAll(".viz-gains li");
+  // hero film: plays once; copy reveals when the new resume lands, or on first scroll
+  var film = document.getElementById("film"), vid = document.getElementById("hero-video"), vs = document.querySelector(".vs");
   var from = +vs.dataset.from, to = +vs.dataset.to;
+  var LAND = 3.3, SCORE_A = 1.2, SCORE_B = 3.4;
+  function reveal() { film.classList.add("revealed"); }
   function sync() {
-    var t = vid.currentTime, k = Math.max(0, Math.min(1, (t - 3.5) / 1.1)), e = 1 - Math.pow(1 - k, 3);
+    var t = vid.currentTime, k = Math.max(0, Math.min(1, (t - SCORE_A) / (SCORE_B - SCORE_A))), e = 1 - Math.pow(1 - k, 3);
     vs.textContent = Math.round(from + (to - from) * e);
-    gains.forEach(function (g, i) { g.classList.toggle("on", t >= 3.8 + i * 0.4); });
+    if (t >= LAND) reveal();
     if (!vid.paused && !vid.ended) requestAnimationFrame(sync);
   }
-  function runViz() {
-    if (reduce) { vid.removeAttribute("autoplay"); vid.poster = "media/hero-end.jpg"; vs.textContent = to; gains.forEach(function (g) { g.classList.add("on"); }); return; }
+  function runViz(replay) {
+    if (reduce) { vid.poster = "media/hero-end.jpg"; vs.textContent = to; reveal(); return; }
     try { vid.currentTime = 0; } catch (e) {}
-    var pr = vid.play(); if (pr && pr.catch) pr.catch(function () { vs.textContent = to; gains.forEach(function (g) { g.classList.add("on"); }); });
+    var pr = vid.play(); if (pr && pr.catch) pr.catch(function () { vs.textContent = to; reveal(); });
     requestAnimationFrame(sync);
   }
   vid.addEventListener("play", function () { requestAnimationFrame(sync); });
-  vid.addEventListener("ended", sync);
-  if ("IntersectionObserver" in window) {
-    var started = false;
-    new IntersectionObserver(function (es) { if (es[0].isIntersecting && !started) { started = true; setTimeout(runViz, 400); } }, { threshold: .4 }).observe(vid);
-  } else { runViz(); }
-  document.getElementById("viz-replay").addEventListener("click", runViz);
+  vid.addEventListener("ended", function () { vs.textContent = to; reveal(); });
+  vid.addEventListener("error", function () { vs.textContent = to; reveal(); }, true);
+  addEventListener("scroll", function once() { if (scrollY > 40) { reveal(); removeEventListener("scroll", once); } }, { passive:true });
+  setTimeout(reveal, 7000);
+  runViz();
+  document.getElementById("viz-replay").addEventListener("click", function () { runViz(true); });
 
   // hero chat: count up with the bar, replay
   function countUp(chat) {
