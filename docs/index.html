@@ -292,6 +292,69 @@
     .js .flow li::before { transform:scaleX(1); }
   }
   @media (hover: none) { .steps > li > div > b::after { display:none; } }
+
+  /* ===== Hero: resume transformation ===== */
+  .hero-viz { position:relative; }
+  .stage { position:relative; aspect-ratio:210/240; max-height:560px; margin-inline:auto; width:100%; max-width:470px; background:#fff; border-radius:2px; overflow:hidden; box-shadow:0 30px 60px -20px rgba(0,0,0,.6); }
+  .rs { position:absolute; inset:0; padding:7% 8%; direction:ltr; }
+  .ln { display:block; height:7px; width:var(--w); background:#C9CDD3; border-radius:1px; margin:0 0 7px; }
+  .ln.lt { background:rgba(255,255,255,.45); }
+  /* before: cluttered */
+  .before { display:grid; grid-template-columns:34% 1fr; gap:6%; padding:0; background:#F3F0E8; }
+  .b-side { background:#5A6B7D; padding:18% 12%; }
+  .b-photo { width:56%; aspect-ratio:1; border-radius:50%; background:#AEB8C2; margin:0 auto 14%; }
+  .b-gap { height:12%; }
+  .b-dots { display:flex; gap:6%; } .b-dots i { width:14%; aspect-ratio:1; border-radius:50%; background:#C8A64B; }
+  .b-main { padding:12% 10% 0 0; }
+  .b-name { font:800 clamp(14px,2.2vw,22px)/1 "Courier New", monospace; color:#7A3E9D; letter-spacing:.18em; margin-bottom:9%; text-decoration:underline wavy #C8A64B; }
+  .before .ln { background:#B9B2A2; height:5px; margin-bottom:5px; }
+  .b-table { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin:8% 0; }
+  .b-table i { height:16px; background:#E1D9C6; border:1px solid #B9B2A2; }
+  .flag { position:absolute; font:700 12.5px var(--body); color:#fff; background:#C2273A; padding:4px 8px; border-radius:2px; white-space:nowrap; z-index:2; }
+  .flag::before { content:""; position:absolute; inset:-6px; border:2px dashed #C2273A; z-index:-1; }
+  .f1 { left:5%; top:34%; } .f2 { right:6%; top:44%; } .f3 { left:42%; bottom:8%; }
+
+  /* after: clean one page */
+  .after { background:#fff; }
+  .a-name { font:800 clamp(20px,3vw,30px)/1 var(--display); color:#D60376; }
+  .a-head { font:700 clamp(11px,1.2vw,13px)/1.3 var(--body); color:#0D1B2A; margin:4px 0 6px; }
+  .a-contact { display:flex; gap:6px; } .a-contact .ln { height:5px; background:#D5D9DE; }
+  .a-h { font:800 10.5px var(--body); letter-spacing:.12em; color:#0D1B2A; border-bottom:1px solid #0D1B2A; padding-bottom:3px; margin:12px 0 7px; }
+  .after .ln { background:#C9CFD6; height:6px; margin-bottom:6px; }
+  .a-role { display:flex; justify-content:space-between; margin:4px 0 6px; } .a-role b { width:46%; height:8px; background:#0D1B2A; } .a-role em { width:16%; height:6px; background:#9AA3AD; }
+  .a-bul { display:flex; align-items:center; gap:5px; margin:0 0 6px 6px; } .a-bul .ln { margin:0; }
+  .a-bul .dot { width:4px; height:4px; background:#0D1B2A; border-radius:50%; flex:none; }
+  .kw { font:700 10.5px var(--body); color:#fff; background:#D60376; padding:1px 6px; border-radius:2px; flex:none; }
+  /* scan line */
+  .scan { position:absolute; left:0; right:0; top:0; height:3px; background:var(--magenta); box-shadow:0 0 18px 4px rgba(255,92,168,.55); opacity:0; z-index:3; }
+  /* states driven by JS */
+  .after { clip-path:inset(0 0 100% 0); }
+  .stage.go .after { animation:wipe 1.8s var(--ease) forwards; }
+  .stage.go .scan { animation:scan 1.8s var(--ease) forwards; }
+  .stage.go .flag { animation:flagOut .5s var(--ease) forwards; }
+  .stage .flag { animation:flagIn .5s var(--ease) backwards; }
+  .stage .f2 { animation-delay:.25s; } .stage .f3 { animation-delay:.5s; }
+  .stage.go .kw { animation:kwIn .6s var(--spring) backwards; animation-delay:1.7s; }
+  @keyframes wipe { to { clip-path:inset(0 0 0 0); } }
+  @keyframes scan { 0% { top:0; opacity:1; } 92% { opacity:1; } 100% { top:100%; opacity:0; } }
+  @keyframes flagIn { from { opacity:0; transform:translateY(-6px) scale(.9); } }
+  @keyframes flagOut { to { opacity:0; transform:scale(.9); } }
+  @keyframes kwIn { from { transform:scale(0); } }
+  .viz-foot { max-width:470px; margin:18px auto 0; display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px 20px; }
+  .viz-score { font-size:15px; color:var(--chalk-70); }
+  .viz-score .vs { font:800 40px var(--display); color:var(--chalk); font-variant-numeric:tabular-nums; margin-inline-start:6px; }
+  .viz-score .of { color:var(--chalk-50); }
+  .viz-gains { list-style:none; margin:0; padding:0; display:grid; gap:4px; font-size:14.5px; }
+  .viz-gains li { color:var(--chalk-70); opacity:.25; transition:opacity .5s var(--ease), color .5s; display:flex; gap:8px; align-items:center; }
+  .viz-gains li::before { content:""; width:12px; height:7px; border-left:2px solid var(--magenta); border-bottom:2px solid var(--magenta); transform:rotate(-45deg) translateY(-2px); flex:none; }
+  .viz-gains li.on { opacity:1; color:var(--chalk); }
+  .viz-meta { max-width:470px; margin:14px auto 0; display:flex; justify-content:space-between; gap:16px; align-items:center; font-size:13px; color:var(--chalk-50); }
+  @media (prefers-reduced-motion: reduce) { .after { clip-path:none; } .flag { display:none; } .viz-gains li { opacity:1; } }
+
+  /* ===== Consistent section reveal ===== */
+  .js .rv { opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); transition-delay:calc(var(--i,0) * 70ms); }
+  .js section.in .rv, .js .hero.in .rv { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) { .js .rv { opacity:1; transform:none; } }
 </style>
 </head>
 <body>
@@ -345,22 +408,66 @@
       </div>
     </div>
 
-    <div class="chat-wrap en"><div class="chat play" aria-label="Example conversation">
-      <div class="chat-head"><span>Claude · RezuMatch</span><span>Example</span></div>
-      <div class="msg ai"><span class="step">Step 5 of 11 · Your score</span>Estimated match for this job: 48/100. The biggest problem: the listing asks for "onboarding" and "KPIs", and your resume never says them.</div>
-      <div class="msg ai"><span class="step">Step 6 of 11 · Closing gaps</span>Which of these did you actually do at your last job?<ul class="opts"><li><b>a)</b> Onboarded new customers</li><li><b>b)</b> Tracked team KPIs</li><li><b>c)</b> Neither</li></ul></div>
-      <div class="msg me">Both a and b. I onboarded around 40 clients a year.</div>
-      <div class="msg ai">Got it. I'll write exactly that, nothing more. One question left.</div>
-      <div class="msg ai"><span class="step">Step 9 of 11 · Rescore</span><div class="score"><div class="bar"><i></i></div><strong class="count" data-to="87" data-from="48">87</strong><small>was 48</small></div></div>
-    </div><button type="button" class="replay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Replay the example</button></div>
-    <div class="chat-wrap he"><div class="chat play" aria-label="דוגמה לשיחה">
-      <div class="chat-head"><span>Claude · RezuMatch</span><span>דוגמה</span></div>
-      <div class="msg ai"><span class="step">שלב 5 מתוך 11 · הציון שלכם</span>התאמה משוערת למשרה: 48 מתוך 100. הבעיה הכי גדולה: במודעה כתוב "onboarding" ו-"KPIs", ובקורות החיים שלכם המילים האלה לא מופיעות.</div>
-      <div class="msg ai"><span class="step">שלב 6 מתוך 11 · סוגרים פערים</span>מה מאלה עשיתם בפועל בעבודה האחרונה?<ul class="opts"><li><b>א)</b> קליטה של לקוחות חדשים</li><li><b>ב)</b> מעקב אחרי יעדים (KPIs) של הצוות</li><li><b>ג)</b> אף אחד מהם</li></ul></div>
-      <div class="msg me">גם א וגם ב. קלטתי בערך 40 לקוחות בשנה.</div>
-      <div class="msg ai">רשמתי. אכתוב בדיוק את זה, לא יותר. נשארה עוד שאלה אחת.</div>
-      <div class="msg ai"><span class="step">שלב 9 מתוך 11 · ציון חדש</span><div class="score"><div class="bar"><i></i></div><strong class="count" data-to="87" data-from="48">87</strong><small>היה 48</small></div></div>
-    </div><button type="button" class="replay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>להפעיל שוב את הדוגמה</button></div>
+    <div class="hero-viz">
+      <div class="stage" id="stage">
+        
+      <div class="rs before" aria-hidden="true">
+        <div class="b-side">
+          <div class="b-photo"></div>
+          <i class="ln lt" style="--w:80%"></i><i class="ln lt" style="--w:60%"></i>
+          <div class="b-gap"></div>
+          <i class="ln lt" style="--w:70%"></i><i class="ln lt" style="--w:90%"></i><i class="ln lt" style="--w:50%"></i><i class="ln lt" style="--w:75%"></i>
+          <div class="b-gap"></div>
+          <div class="b-dots"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="b-main">
+          <div class="b-name">MAYA LEVI</div>
+          <i class="ln " style="--w:95%"></i><i class="ln " style="--w:88%"></i><i class="ln " style="--w:92%"></i><i class="ln " style="--w:70%"></i>
+          <div class="b-table"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <i class="ln " style="--w:90%"></i><i class="ln " style="--w:85%"></i><i class="ln " style="--w:60%"></i>
+          <div class="b-table"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <i class="ln " style="--w:80%"></i><i class="ln " style="--w:93%"></i>
+        </div>
+        <span class="flag f1"><span class="en">Two columns</span><span class="he">שתי עמודות</span></span>
+        <span class="flag f2"><span class="en">Tables</span><span class="he">טבלאות</span></span>
+        <span class="flag f3"><span class="en">Missing job words</span><span class="he">חסרות מילים מהמשרה</span></span>
+      </div>
+        
+      <div class="rs after" aria-hidden="true">
+        <div class="a-name">Maya Levi</div>
+        <div class="a-head">Customer Success Manager</div>
+        <div class="a-contact"><i class="ln " style="--w:18%"></i><i class="ln " style="--w:22%"></i><i class="ln " style="--w:20%"></i></div>
+        <div class="a-h">SUMMARY</div>
+        <i class="ln " style="--w:97%"></i><i class="ln " style="--w:90%"></i>
+        <div class="a-h">EXPERIENCE</div>
+        <div class="a-role"><b></b><em></em></div>
+        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:62%"></i><span class="kw">onboarding</span></div>
+        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:40%"></i><span class="kw">KPIs</span><i class="ln " style="--w:25%"></i></div>
+        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:78%"></i></div>
+        <div class="a-role"><b></b><em></em></div>
+        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:70%"></i></div>
+        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:55%"></i></div>
+        <div class="a-h">SKILLS</div>
+        <i class="ln " style="--w:85%"></i>
+        <div class="a-h">EDUCATION</div>
+        <i class="ln " style="--w:60%"></i>
+      </div>
+        <div class="scan" aria-hidden="true"></div>
+      </div>
+      <div class="viz-foot">
+        <div class="viz-score"><span class="en">Estimated match</span><span class="he">התאמה משוערת</span> <b class="vs" data-from="48" data-to="87">48</b><span class="of">/100</span></div>
+        <ul class="viz-gains">
+          <li><span class="en">One clean column</span><span class="he">עמודה אחת נקייה</span></li>
+          <li><span class="en">The job's words, where true</span><span class="he">המילים של המשרה, איפה שזה נכון</span></li>
+          <li><span class="en">Every fact from you</span><span class="he">כל עובדה מגיעה מכם</span></li>
+        </ul>
+      </div>
+      <div class="viz-meta">
+        <span class="en">Illustration with a made-up resume. Your result depends on your real experience.</span>
+        <span class="he">המחשה עם קורות חיים בדויים. התוצאה שלכם תלויה בניסיון האמיתי שלכם.</span>
+        <button type="button" class="replay" id="viz-replay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span class="en">Replay</span><span class="he">שוב</span></button>
+      </div>
+    </div>
   </div>
 
   <!-- WHY -->
@@ -632,20 +739,38 @@
   function onScroll() { var h = document.documentElement; var p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight); bar.style.setProperty("--p", p.toFixed(4)); }
   addEventListener("scroll", onScroll, { passive:true }); onScroll();
 
-  // reveal on scroll (staggered inside each group)
-  var groups = [".flow li", ".steps > li"];
-  groups.forEach(function (sel) {
-    var els = document.querySelectorAll(sel);
-    els.forEach(function (el, i) { el.setAttribute("data-reveal", ""); el.style.setProperty("--i", i % 6); });
+  // reveal on scroll: whole sections, so hidden languages and tabs never get stuck
+  var revealSel = ".sec-head > *, .why > div, .need li, .choice, .tally-host, .steps > li, .help, .video, .flow li, .tips > div, .faq details, .maker > *";
+  document.querySelectorAll("section").forEach(function (sec) {
+    var n = 0;
+    sec.querySelectorAll(revealSel).forEach(function (el) { el.classList.add("rv"); el.style.setProperty("--i", Math.min(n++, 8)); });
   });
   if ("IntersectionObserver" in window && !reduce) {
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-    }, { rootMargin:"0px 0px -8% 0px", threshold:0.12 });
-    document.querySelectorAll("[data-reveal]").forEach(function (el) { io.observe(el); });
+    }, { rootMargin:"0px 0px -12% 0px", threshold:0 });
+    document.querySelectorAll("section").forEach(function (sec) { io.observe(sec); });
   } else {
-    document.querySelectorAll("[data-reveal]").forEach(function (el) { el.classList.add("in"); });
+    document.querySelectorAll("section").forEach(function (sec) { sec.classList.add("in"); });
   }
+
+  // hero visual: cluttered resume -> clean one page
+  var stage = document.getElementById("stage"), vs = document.querySelector(".vs"), gains = document.querySelectorAll(".viz-gains li");
+  var timers = [];
+  function runViz() {
+    timers.forEach(clearTimeout); timers = [];
+    stage.classList.remove("go"); gains.forEach(function (g) { g.classList.remove("on"); }); vs.textContent = vs.dataset.from;
+    void stage.offsetWidth;
+    if (reduce) { stage.classList.add("go"); gains.forEach(function (g) { g.classList.add("on"); }); vs.textContent = vs.dataset.to; return; }
+    timers.push(setTimeout(function () {
+      stage.classList.add("go");
+      gains.forEach(function (g, i) { timers.push(setTimeout(function () { g.classList.add("on"); }, 500 + i * 450)); });
+      var from = +vs.dataset.from, to = +vs.dataset.to, t0 = performance.now();
+      (function tick(now) { var k = Math.min(1, (now - t0) / 1800), e = 1 - Math.pow(1 - k, 4); vs.textContent = Math.round(from + (to - from) * e); if (k < 1) requestAnimationFrame(tick); })(t0);
+    }, 1800));
+  }
+  runViz();
+  document.getElementById("viz-replay").addEventListener("click", runViz);
 
   // hero chat: count up with the bar, replay
   function countUp(chat) {
