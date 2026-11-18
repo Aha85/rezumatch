@@ -21,5 +21,6 @@
 
 ## Hebrew writing
 - Short, spoken Hebrew. Avoid translated phrasing that no Israeli would say out loud.
-- Same rules as writing-quality.md: no em dashes, no slogans, one idea per bullet.
+- Same rules as writing-quality.md and anti-slop.md (its Hebrew list): no em dashes, no slogans, no translated phrasing, one idea per bullet.
+- Write in the candidate's own grammatical gender (מנהלת / מנהל), never "בעל/ת".
 - File names: "<שם מלא> קורות חיים.pdf" or the English pattern, the user chooses.

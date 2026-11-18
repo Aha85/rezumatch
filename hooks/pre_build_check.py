@@ -1,4 +1,5 @@
-"""PreToolUse hook: before any resume-helper build command runs, check the draft for invented facts.
+"""PreToolUse hook: before any resume-helper build command runs, check the draft for invented facts
+and for AI-text patterns (slop_check.py).
 
 Triggers only on shell commands that call fit_page.py, build_pdf.py or build_docx.py.
 Exit 2 blocks the command and sends the list of unmatched facts back to Claude.
@@ -33,6 +34,7 @@ if not htmls:
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "skills" / "rezumatch" / "scripts"))
 import verify_facts  # noqa: E402
+import slop_check  # noqa: E402
 
 status = 0
 for h in htmls:
@@ -43,5 +45,7 @@ for h in htmls:
         continue
     sys.argv = ["verify_facts.py", str(p)]
     if verify_facts.main() != 0:
+        status = 2
+    if slop_check.main([str(p)]) != 0:
         status = 2
 sys.exit(status)

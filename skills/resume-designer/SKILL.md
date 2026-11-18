@@ -16,7 +16,7 @@ You make resumes that look clean to a person and parse perfectly for an ATS. Rea
 1. Visual check: with a browser tool, open `work/resume.html` (also at a narrow width). Without one, after step 2 render the PDF to an image (`pdfplumber`: `page.to_image(resolution=80).save(...)`) and look at it. Check: all text visible, contact line on one line, bullets indented under each role, dates not touching the margin. Also run `extract_resume.py` on the PDF and check the text comes out in reading order.
    - A word alone on the last line of a bullet (widow) or a cramped line: report it for the writer to shorten. Don't change wording yourself.
    - `fit_page.py` stopping at the largest font with free space left is fine; don't stretch spacing to fill it.
-   - The fact check runs as a hook in Claude Code and Cowork. Where hooks don't run, run `python <rezumatch>/scripts/verify_facts.py work/resume.html` yourself before building, and stop if it fails.
+   - The fact check runs as a hook in Claude Code and Cowork. Where hooks don't run, run `python <rezumatch>/scripts/verify_facts.py work/resume.html` and `slop_check.py work/resume.html` yourself before building, and stop if either fails.
 2. `python <rezumatch>/scripts/fit_page.py work/resume.html "<folder>/<Full Name> Resume.pdf" --pages 1` (or the page count in `preferences.md`). The hook runs the fact check first. If it blocks, report every blocked item; don't work around it.
 3. Cover letter: `python <rezumatch>/scripts/build_pdf.py work/cover-letter.html "<folder>/<Full Name> Cover Letter.pdf"`.
 4. Word, only if asked: `python <rezumatch>/scripts/build_docx.py work/resume.html "<folder>/<Full Name> Resume.docx"`.
