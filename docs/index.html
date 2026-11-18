@@ -295,52 +295,10 @@
 
   /* ===== Hero: resume transformation ===== */
   .hero-viz { position:relative; }
-  .stage { position:relative; aspect-ratio:210/240; max-height:560px; margin-inline:auto; width:100%; max-width:470px; background:#fff; border-radius:2px; overflow:hidden; box-shadow:0 30px 60px -20px rgba(0,0,0,.6); }
-  .rs { position:absolute; inset:0; padding:7% 8%; direction:ltr; }
-  .ln { display:block; height:7px; width:var(--w); background:#C9CDD3; border-radius:1px; margin:0 0 7px; }
-  .ln.lt { background:rgba(255,255,255,.45); }
-  /* before: cluttered */
-  .before { display:grid; grid-template-columns:34% 1fr; gap:6%; padding:0; background:#F3F0E8; }
-  .b-side { background:#5A6B7D; padding:18% 12%; }
-  .b-photo { width:56%; aspect-ratio:1; border-radius:50%; background:#AEB8C2; margin:0 auto 14%; }
-  .b-gap { height:12%; }
-  .b-dots { display:flex; gap:6%; } .b-dots i { width:14%; aspect-ratio:1; border-radius:50%; background:#C8A64B; }
-  .b-main { padding:12% 10% 0 0; }
-  .b-name { font:800 clamp(14px,2.2vw,22px)/1 "Courier New", monospace; color:#7A3E9D; letter-spacing:.18em; margin-bottom:9%; text-decoration:underline wavy #C8A64B; }
-  .before .ln { background:#B9B2A2; height:5px; margin-bottom:5px; }
-  .b-table { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin:8% 0; }
-  .b-table i { height:16px; background:#E1D9C6; border:1px solid #B9B2A2; }
-  .flag { position:absolute; font:700 12.5px var(--body); color:#fff; background:#C2273A; padding:4px 8px; border-radius:2px; white-space:nowrap; z-index:2; }
-  .flag::before { content:""; position:absolute; inset:-6px; border:2px dashed #C2273A; z-index:-1; }
-  .f1 { left:5%; top:34%; } .f2 { right:6%; top:44%; } .f3 { left:42%; bottom:8%; }
-
-  /* after: clean one page */
-  .after { background:#fff; }
-  .a-name { font:800 clamp(20px,3vw,30px)/1 var(--display); color:#D60376; }
-  .a-head { font:700 clamp(11px,1.2vw,13px)/1.3 var(--body); color:#0D1B2A; margin:4px 0 6px; }
-  .a-contact { display:flex; gap:6px; } .a-contact .ln { height:5px; background:#D5D9DE; }
-  .a-h { font:800 10.5px var(--body); letter-spacing:.12em; color:#0D1B2A; border-bottom:1px solid #0D1B2A; padding-bottom:3px; margin:12px 0 7px; }
-  .after .ln { background:#C9CFD6; height:6px; margin-bottom:6px; }
-  .a-role { display:flex; justify-content:space-between; margin:4px 0 6px; } .a-role b { width:46%; height:8px; background:#0D1B2A; } .a-role em { width:16%; height:6px; background:#9AA3AD; }
-  .a-bul { display:flex; align-items:center; gap:5px; margin:0 0 6px 6px; } .a-bul .ln { margin:0; }
-  .a-bul .dot { width:4px; height:4px; background:#0D1B2A; border-radius:50%; flex:none; }
-  .kw { font:700 10.5px var(--body); color:#fff; background:#D60376; padding:1px 6px; border-radius:2px; flex:none; }
-  /* scan line */
-  .scan { position:absolute; left:0; right:0; top:0; height:3px; background:var(--magenta); box-shadow:0 0 18px 4px rgba(255,92,168,.55); opacity:0; z-index:3; }
-  /* states driven by JS */
-  .after { clip-path:inset(0 0 100% 0); }
-  .stage.go .after { animation:wipe 1.8s var(--ease) forwards; }
-  .stage.go .scan { animation:scan 1.8s var(--ease) forwards; }
-  .stage.go .flag { animation:flagOut .5s var(--ease) forwards; }
-  .stage .flag { animation:flagIn .5s var(--ease) backwards; }
-  .stage .f2 { animation-delay:.25s; } .stage .f3 { animation-delay:.5s; }
-  .stage.go .kw { animation:kwIn .6s var(--spring) backwards; animation-delay:1.7s; }
-  @keyframes wipe { to { clip-path:inset(0 0 0 0); } }
-  @keyframes scan { 0% { top:0; opacity:1; } 92% { opacity:1; } 100% { top:100%; opacity:0; } }
-  @keyframes flagIn { from { opacity:0; transform:translateY(-6px) scale(.9); } }
-  @keyframes flagOut { to { opacity:0; transform:scale(.9); } }
-  @keyframes kwIn { from { transform:scale(0); } }
-  .viz-foot { max-width:470px; margin:18px auto 0; display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px 20px; }
+  .stage { position:relative; aspect-ratio:16/9; width:100%; border:1px solid var(--chalk-15); border-radius:2px; overflow:hidden; background:#0B1420; }
+  .stage video { width:100%; height:100%; display:block; object-fit:cover; }
+  .stage::after { content:""; position:absolute; inset:0; box-shadow:inset 0 0 60px 20px var(--navy); pointer-events:none; }
+  .viz-foot { max-width:none; margin:18px auto 0; display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px 20px; }
   .viz-score { font-size:15px; color:var(--chalk-70); }
   .viz-score .vs { font:800 40px var(--display); color:var(--chalk); font-variant-numeric:tabular-nums; margin-inline-start:6px; }
   .viz-score .of { color:var(--chalk-50); }
@@ -348,8 +306,8 @@
   .viz-gains li { color:var(--chalk-70); opacity:.25; transition:opacity .5s var(--ease), color .5s; display:flex; gap:8px; align-items:center; }
   .viz-gains li::before { content:""; width:12px; height:7px; border-left:2px solid var(--magenta); border-bottom:2px solid var(--magenta); transform:rotate(-45deg) translateY(-2px); flex:none; }
   .viz-gains li.on { opacity:1; color:var(--chalk); }
-  .viz-meta { max-width:470px; margin:14px auto 0; display:flex; justify-content:space-between; gap:16px; align-items:center; font-size:13px; color:var(--chalk-50); }
-  @media (prefers-reduced-motion: reduce) { .after { clip-path:none; } .flag { display:none; } .viz-gains li { opacity:1; } }
+  .viz-meta { max-width:none; margin:14px auto 0; display:flex; justify-content:space-between; gap:16px; align-items:center; font-size:13px; color:var(--chalk-50); }
+  @media (prefers-reduced-motion: reduce) { .viz-gains li { opacity:1; } }
 
   /* ===== Consistent section reveal ===== */
   .js .rv { opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); transition-delay:calc(var(--i,0) * 70ms); }
@@ -410,49 +368,10 @@
 
     <div class="hero-viz">
       <div class="stage" id="stage">
-        
-      <div class="rs before" aria-hidden="true">
-        <div class="b-side">
-          <div class="b-photo"></div>
-          <i class="ln lt" style="--w:80%"></i><i class="ln lt" style="--w:60%"></i>
-          <div class="b-gap"></div>
-          <i class="ln lt" style="--w:70%"></i><i class="ln lt" style="--w:90%"></i><i class="ln lt" style="--w:50%"></i><i class="ln lt" style="--w:75%"></i>
-          <div class="b-gap"></div>
-          <div class="b-dots"><i></i><i></i><i></i><i></i><i></i></div>
-        </div>
-        <div class="b-main">
-          <div class="b-name">MAYA LEVI</div>
-          <i class="ln " style="--w:95%"></i><i class="ln " style="--w:88%"></i><i class="ln " style="--w:92%"></i><i class="ln " style="--w:70%"></i>
-          <div class="b-table"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <i class="ln " style="--w:90%"></i><i class="ln " style="--w:85%"></i><i class="ln " style="--w:60%"></i>
-          <div class="b-table"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <i class="ln " style="--w:80%"></i><i class="ln " style="--w:93%"></i>
-        </div>
-        <span class="flag f1"><span class="en">Two columns</span><span class="he">שתי עמודות</span></span>
-        <span class="flag f2"><span class="en">Tables</span><span class="he">טבלאות</span></span>
-        <span class="flag f3"><span class="en">Missing job words</span><span class="he">חסרות מילים מהמשרה</span></span>
-      </div>
-        
-      <div class="rs after" aria-hidden="true">
-        <div class="a-name">Maya Levi</div>
-        <div class="a-head">Customer Success Manager</div>
-        <div class="a-contact"><i class="ln " style="--w:18%"></i><i class="ln " style="--w:22%"></i><i class="ln " style="--w:20%"></i></div>
-        <div class="a-h">SUMMARY</div>
-        <i class="ln " style="--w:97%"></i><i class="ln " style="--w:90%"></i>
-        <div class="a-h">EXPERIENCE</div>
-        <div class="a-role"><b></b><em></em></div>
-        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:62%"></i><span class="kw">onboarding</span></div>
-        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:40%"></i><span class="kw">KPIs</span><i class="ln " style="--w:25%"></i></div>
-        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:78%"></i></div>
-        <div class="a-role"><b></b><em></em></div>
-        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:70%"></i></div>
-        <div class="a-bul"><i class="dot"></i><i class="ln " style="--w:55%"></i></div>
-        <div class="a-h">SKILLS</div>
-        <i class="ln " style="--w:85%"></i>
-        <div class="a-h">EDUCATION</div>
-        <i class="ln " style="--w:60%"></i>
-      </div>
-        <div class="scan" aria-hidden="true"></div>
+        <video id="hero-video" muted playsinline preload="auto" poster="media/hero-start.jpg" aria-label="A messy resume turns into a clean one-page resume">
+          <source src="media/hero.webm" type="video/webm">
+          <source src="media/hero.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="viz-foot">
         <div class="viz-score"><span class="en">Estimated match</span><span class="he">התאמה משוערת</span> <b class="vs" data-from="48" data-to="87">48</b><span class="of">/100</span></div>
@@ -754,22 +673,27 @@
     document.querySelectorAll("section").forEach(function (sec) { sec.classList.add("in"); });
   }
 
-  // hero visual: cluttered resume -> clean one page
-  var stage = document.getElementById("stage"), vs = document.querySelector(".vs"), gains = document.querySelectorAll(".viz-gains li");
-  var timers = [];
-  function runViz() {
-    timers.forEach(clearTimeout); timers = [];
-    stage.classList.remove("go"); gains.forEach(function (g) { g.classList.remove("on"); }); vs.textContent = vs.dataset.from;
-    void stage.offsetWidth;
-    if (reduce) { stage.classList.add("go"); gains.forEach(function (g) { g.classList.add("on"); }); vs.textContent = vs.dataset.to; return; }
-    timers.push(setTimeout(function () {
-      stage.classList.add("go");
-      gains.forEach(function (g, i) { timers.push(setTimeout(function () { g.classList.add("on"); }, 500 + i * 450)); });
-      var from = +vs.dataset.from, to = +vs.dataset.to, t0 = performance.now();
-      (function tick(now) { var k = Math.min(1, (now - t0) / 1800), e = 1 - Math.pow(1 - k, 4); vs.textContent = Math.round(from + (to - from) * e); if (k < 1) requestAnimationFrame(tick); })(t0);
-    }, 1800));
+  // hero video: the score and gains follow the magenta beam (3.0s to 4.5s in the clip)
+  var vid = document.getElementById("hero-video"), vs = document.querySelector(".vs"), gains = document.querySelectorAll(".viz-gains li");
+  var from = +vs.dataset.from, to = +vs.dataset.to;
+  function sync() {
+    var t = vid.currentTime, k = Math.max(0, Math.min(1, (t - 3.0) / 1.5)), e = 1 - Math.pow(1 - k, 3);
+    vs.textContent = Math.round(from + (to - from) * e);
+    gains.forEach(function (g, i) { g.classList.toggle("on", t >= 3.4 + i * 0.5); });
+    if (!vid.paused && !vid.ended) requestAnimationFrame(sync);
   }
-  runViz();
+  function runViz() {
+    if (reduce) { vid.removeAttribute("autoplay"); vid.poster = "media/hero-end.jpg"; vs.textContent = to; gains.forEach(function (g) { g.classList.add("on"); }); return; }
+    try { vid.currentTime = 0; } catch (e) {}
+    var pr = vid.play(); if (pr && pr.catch) pr.catch(function () { vs.textContent = to; gains.forEach(function (g) { g.classList.add("on"); }); });
+    requestAnimationFrame(sync);
+  }
+  vid.addEventListener("play", function () { requestAnimationFrame(sync); });
+  vid.addEventListener("ended", sync);
+  if ("IntersectionObserver" in window) {
+    var started = false;
+    new IntersectionObserver(function (es) { if (es[0].isIntersecting && !started) { started = true; setTimeout(runViz, 400); } }, { threshold: .4 }).observe(vid);
+  } else { runViz(); }
   document.getElementById("viz-replay").addEventListener("click", runViz);
 
   // hero chat: count up with the bar, replay
