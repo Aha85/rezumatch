@@ -7,7 +7,7 @@
 **Made by:** Danny Shaket, AI trainer and MBA lecturer (dannyshaket.com). The tool is free; it also introduces people to Danny's work.
 
 **Surfaces:**
-- `docs/index.html`: the public install and usage guide (GitHub Pages). Mode: Persuade, with a Read core (install steps).
+- Public install and usage guide: https://www.dannyshaket.com/creations/rezumatch (source lives in the site repo, `scripts/creations/rezumatch-source.html`). Mode: Persuade, with a Read core (install steps).
 - The plugin itself runs inside Claude (chat UI), not ours to design.
 
 **Voice:** direct, warm, practical; plain spoken words; numbers over adjectives; no em dashes; no hype words. Hebrew addresses the reader as "אתם".
