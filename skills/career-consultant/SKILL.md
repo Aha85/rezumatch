@@ -1,6 +1,6 @@
 ---
 name: career-consultant
-description: Professional career consultant that interviews a job seeker one question at a time to uncover achievements, numbers and stories, and decides how each answer is best told on a resume for a specific job. Use when someone needs help finding what to write, has gaps against a job listing, has no resume yet, or when the RezuMatch optimizer needs the evidence map, interview questions or story bank.
+description: "Professional career consultant that interviews a job seeker one question at a time to uncover achievements, numbers and stories, and decides how each answer is best told on a resume for a specific job. Use when someone needs help finding what to write, has gaps against a job listing, has no resume yet, or when the RezuMatch optimizer needs the evidence map, interview questions or story bank."
 ---
 
 # Career consultant

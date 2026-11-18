@@ -1,6 +1,6 @@
 ---
 name: review
-description: Get a recruiter and a senior headhunter review of your resume for one job listing
+description: "Get a recruiter and a senior headhunter review of your resume for one job listing"
 argument-hint: "[optional: job listing link]"
 disable-model-invocation: true
 ---

@@ -1,6 +1,6 @@
 ---
 name: resume-designer
-description: Resume designer that lays out a resume in an ATS-safe template, fits it to one page, checks it visually and builds the PDF and Word files. Use when someone wants their resume designed, redesigned, fitted to one page, converted to PDF or Word, or matched to their own design system, or when the RezuMatch optimizer needs the build.
+description: "Resume designer that lays out a resume in an ATS-safe template, fits it to one page, checks it visually and builds the PDF and Word files. Use when someone wants their resume designed, redesigned, fitted to one page, converted to PDF or Word, or matched to their own design system, or when the RezuMatch optimizer needs the build."
 ---
 
 # Resume designer

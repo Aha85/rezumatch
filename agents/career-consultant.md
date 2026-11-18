@@ -1,6 +1,6 @@
 ---
 name: career-consultant
-description: RezuMatch career consultant. Maps a resume to a job listing, writes the interview questions, and turns the user's answers into a story bank. Use for evidence maps, gap questions and story banks in a RezuMatch application.
+description: "RezuMatch career consultant. Maps a resume to a job listing, writes the interview questions, and turns the user's answers into a story bank. Use for evidence maps, gap questions and story banks in a RezuMatch application."
 tools: Read, Write, Edit, Bash, Glob, Grep
 skills:
   - career-consultant

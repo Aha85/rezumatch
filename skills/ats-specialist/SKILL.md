@@ -1,6 +1,6 @@
 ---
 name: ats-specialist
-description: ATS specialist that analyzes a job listing and gives an estimated ATS match score for a resume, with missing keywords and format problems. Use when someone wants to score, check or test a resume against a job listing, asks "will my resume pass the ATS", "ציון ATS", or when the RezuMatch optimizer needs a score.
+description: "ATS specialist that analyzes a job listing and gives an estimated ATS match score for a resume, with missing keywords and format problems. Use when someone wants to score, check or test a resume against a job listing, asks \"will my resume pass the ATS\", \"ציון ATS\", or when the RezuMatch optimizer needs a score."
 ---
 
 # ATS specialist

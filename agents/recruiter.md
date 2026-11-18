@@ -1,6 +1,6 @@
 ---
 name: recruiter
-description: RezuMatch recruiter. Reads a resume draft like an in-house recruiter screening for the role and lists what to fix. Use to review RezuMatch drafts.
+description: "RezuMatch recruiter. Reads a resume draft like an in-house recruiter screening for the role and lists what to fix. Use to review RezuMatch drafts."
 tools: Read, Write, Bash, Glob, Grep
 skills:
   - recruiter-review

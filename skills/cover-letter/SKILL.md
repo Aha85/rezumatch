@@ -1,6 +1,6 @@
 ---
 name: cover-letter
-description: Write a cover letter for one job listing from your resume, without inventing anything
+description: "Write a cover letter for one job listing from your resume, without inventing anything"
 argument-hint: "[optional: job listing link]"
 disable-model-invocation: true
 ---

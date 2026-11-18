@@ -1,6 +1,6 @@
 ---
 name: ats-specialist
-description: RezuMatch ATS specialist. Analyzes a job listing into keywords and scores a resume against it with ats_score.py. Use for listing analysis and every resume score in a RezuMatch application.
+description: "RezuMatch ATS specialist. Analyzes a job listing into keywords and scores a resume against it with ats_score.py. Use for listing analysis and every resume score in a RezuMatch application."
 tools: Read, Write, Edit, Bash, Glob, Grep
 skills:
   - ats-specialist

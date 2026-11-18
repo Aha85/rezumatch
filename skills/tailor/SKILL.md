@@ -1,6 +1,6 @@
 ---
 name: tailor
-description: Tailor your resume (and cover letter) to a job listing with the RezuMatch expert team and an ATS score
+description: "Tailor your resume (and cover letter) to a job listing with the RezuMatch expert team and an ATS score"
 argument-hint: "[optional: job listing link]"
 disable-model-invocation: true
 ---

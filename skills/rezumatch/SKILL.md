@@ -1,6 +1,6 @@
 ---
 name: rezumatch
-description: Resume optimizer that runs a team of expert agents (ATS specialist, career consultant, resume writer, recruiter, designer, senior headhunter) to tailor a job seeker's resume and cover letter to one job listing, or to a target role from several listings or a description, so it gets through the first ATS screening. Never invents facts. English and Hebrew. Use when someone wants to fit, tailor, adapt, improve or score their resume or CV for a job, or says "התאם לי קורות חיים", "קורות חיים למשרה", "מכתב פנייה".
+description: "Resume optimizer that runs a team of expert agents (ATS specialist, career consultant, resume writer, recruiter, designer, senior headhunter) to tailor a job seeker's resume and cover letter to one job listing, or to a target role from several listings or a description, so it gets through the first ATS screening. Never invents facts. English and Hebrew. Use when someone wants to fit, tailor, adapt, improve or score their resume or CV for a job, or says \"התאם לי קורות חיים\", \"קורות חיים למשרה\", \"מכתב פנייה\"."
 ---
 
 # RezuMatch: the resume optimizer

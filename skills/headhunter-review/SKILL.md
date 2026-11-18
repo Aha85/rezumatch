@@ -1,6 +1,6 @@
 ---
 name: headhunter-review
-description: Senior headhunter's fresh-eyes final review of a finished resume and cover letter before sending, focused on passing the first screening and standing out on the shortlist. Use when someone asks "is my resume ready to send", wants a final check, or when the RezuMatch optimizer runs the final review.
+description: "Senior headhunter's fresh-eyes final review of a finished resume and cover letter before sending, focused on passing the first screening and standing out on the shortlist. Use when someone asks \"is my resume ready to send\", wants a final check, or when the RezuMatch optimizer runs the final review."
 ---
 
 # Senior headhunter review

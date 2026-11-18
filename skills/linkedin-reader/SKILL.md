@@ -1,6 +1,6 @@
 ---
 name: linkedin-reader
-description: Reads a LinkedIn profile for resume work. Use when a user gives a LinkedIn profile URL as their resume source, or asks to import, read or turn their LinkedIn profile into a resume.
+description: "Reads a LinkedIn profile for resume work. Use when a user gives a LinkedIn profile URL as their resume source, or asks to import, read or turn their LinkedIn profile into a resume."
 ---
 
 # LinkedIn reader

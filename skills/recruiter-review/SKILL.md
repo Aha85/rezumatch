@@ -1,6 +1,6 @@
 ---
 name: recruiter-review
-description: Recruiter and hiring-manager review of a resume draft for one job listing: what a person notices in the first 30 seconds, what's unclear, weak or off-target. Use when someone asks "how will a recruiter read this", wants feedback on a resume for a job, or when the RezuMatch optimizer needs the recruiter read of the draft.
+description: "Recruiter and hiring-manager review of a resume draft for one job listing: what a person notices in the first 30 seconds, what's unclear, weak or off-target. Use when someone asks \"how will a recruiter read this\", wants feedback on a resume for a job, or when the RezuMatch optimizer needs the recruiter read of the draft."
 ---
 
 # Recruiter review

@@ -1,6 +1,6 @@
 ---
 name: designer
-description: RezuMatch designer. Fits the resume HTML to the page count, checks it visually and builds the PDF, cover letter PDF and Word files. Use for every RezuMatch build.
+description: "RezuMatch designer. Fits the resume HTML to the page count, checks it visually and builds the PDF, cover letter PDF and Word files. Use for every RezuMatch build."
 tools: Read, Write, Edit, Bash, Glob, Grep
 skills:
   - resume-designer

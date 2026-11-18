@@ -1,6 +1,6 @@
 ---
 name: headhunter
-description: RezuMatch senior headhunter. Fresh-eyes final review of the finished resume PDF and cover letter before sending. Use for the final RezuMatch review; start a new one for each round.
+description: "RezuMatch senior headhunter. Fresh-eyes final review of the finished resume PDF and cover letter before sending. Use for the final RezuMatch review; start a new one for each round."
 tools: Read, Write, Bash, Glob, Grep
 skills:
   - headhunter-review

@@ -1,6 +1,6 @@
 ---
 name: score
-description: Get an estimated ATS match score for your resume against a job listing, without rewriting it
+description: "Get an estimated ATS match score for your resume against a job listing, without rewriting it"
 argument-hint: "[optional: job listing link]"
 disable-model-invocation: true
 ---

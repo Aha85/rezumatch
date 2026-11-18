@@ -1,6 +1,6 @@
 ---
 name: resume-writer
-description: Expert resume and cover letter writer that turns confirmed facts into ATS-friendly resume text and a tailored cover letter for one job listing, without inventing anything. Use when someone asks to write or rewrite resume bullets, a summary, or a cover letter for a job ("כתוב לי מכתב פנייה"), or when the RezuMatch optimizer needs the draft or the letter.
+description: "Expert resume and cover letter writer that turns confirmed facts into ATS-friendly resume text and a tailored cover letter for one job listing, without inventing anything. Use when someone asks to write or rewrite resume bullets, a summary, or a cover letter for a job (\"כתוב לי מכתב פנייה\"), or when the RezuMatch optimizer needs the draft or the letter."
 ---
 
 # Resume writer

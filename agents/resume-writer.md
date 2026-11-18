@@ -1,6 +1,6 @@
 ---
 name: resume-writer
-description: RezuMatch resume writer. Writes resume text and cover letters from confirmed facts only, and applies fix lists. Use for drafts, rewrites and cover letters in a RezuMatch application.
+description: "RezuMatch resume writer. Writes resume text and cover letters from confirmed facts only, and applies fix lists. Use for drafts, rewrites and cover letters in a RezuMatch application."
 tools: Read, Write, Edit, Bash, Glob, Grep
 skills:
   - resume-writer

@@ -1,6 +1,6 @@
 ---
 name: role
-description: Build one resume for a target role, from a few job listings or a description of the role you want
+description: "Build one resume for a target role, from a few job listings or a description of the role you want"
 argument-hint: "[optional: the role, e.g. Customer Success Manager in B2B SaaS]"
 disable-model-invocation: true
 ---
