@@ -31,7 +31,7 @@ htmls = [next(p for p in grp if p) for grp in paths]
 if not htmls:
     sys.exit(0)
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "skills" / "resume-tailor" / "scripts"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "skills" / "rezumatch" / "scripts"))
 import verify_facts  # noqa: E402
 
 status = 0

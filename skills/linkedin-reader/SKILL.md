@@ -18,7 +18,7 @@ Guide the user, one step per message:
 1. Open your LinkedIn profile.
 2. Click "More" (or "Resources"), then "Save to PDF".
 3. Upload the file here.
-Then run `extract_resume.py` on it from the resume-tailor skill.
+Then run `extract_resume.py` on it from the rezumatch skill (`skills/rezumatch/scripts/`).
 
 ## 3. Paste
 Ask the user to copy the About and Experience sections and paste them.

@@ -20,7 +20,7 @@ except Exception:
     sys.exit(0)
 
 root = pathlib.Path(data.get("cwd") or ".")
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "skills" / "resume-tailor" / "scripts"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "skills" / "rezumatch" / "scripts"))
 from check_filenames import check  # noqa: E402
 
 problems = []

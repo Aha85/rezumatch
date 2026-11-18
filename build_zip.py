@@ -19,7 +19,7 @@ for skill in (root / "skills").iterdir():
     print(f"built {out}")
 
 # Plugin zip for Customize > Plugins > Add > Upload plugin (.claude-plugin/plugin.json at the root).
-PLUGIN_PARTS = [".claude-plugin", "skills", "commands", "hooks", "LICENSE", "README.md", "README.he.md", "requirements.txt"]
+PLUGIN_PARTS = [".claude-plugin", "agents", "skills", "commands", "hooks", "LICENSE", "README.md", "README.he.md", "requirements.txt"]
 out = dist / "rezumatch-plugin.zip"
 with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
     for part in PLUGIN_PARTS:

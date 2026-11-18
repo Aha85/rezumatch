@@ -1,9 +1,11 @@
 # RezuMatch
 
-A free Claude plugin that fits your resume to one specific job listing, step by step.
+A free Claude plugin: a team of expert agents that fits your resume to one specific job listing, so it gets through the first ATS screening.
 
 - **Estimated ATS score** before and after, with the keywords you're missing
-- **A coach, not a form:** one question at a time, with clear choices
+- **An expert team, not one prompt:** an ATS specialist, a career consultant, a resume writer, a recruiter, a designer and a senior headhunter, each in its own context, led by a resume optimizer
+- **Checked in loops:** every draft is scored and reviewed 2-3 times before you get it
+- **One question at a time,** with clear choices
 - **Never invents facts:** every number, title and claim comes from you, and a built-in check blocks anything that doesn't
 - **Ready-to-send files:** a one-page PDF resume, a matching cover letter, and a Word version if a portal asks for one
 - **Your design:** clean built-in templates, or your own Claude design system
@@ -38,24 +40,26 @@ Then type `/tailor` (or just say "help me fit my resume to this job").
 3. Drop the zip into "Plugin file" and click Upload.
 4. Start a chat: "Help me fit my resume to this job".
 
-On claude.ai the two automatic checks (invented facts, file names) don't run as hooks. Claude still follows the same rules from the skill.
+On claude.ai chat, hooks and subagents may not run yet (Anthropic: they run in Cowork and Claude Code). Then one Claude plays each expert in turn and still follows the same rules.
 
 ## Commands
 - `/tailor [job link]`: the full process, from your resume to files ready to send
-- `/score [job link]`: only the estimated score and what's missing
+- `/score [job link]`: only the ATS specialist: estimated score and what's missing
+- `/cover-letter [job link]`: only the writer: a cover letter
+- `/review [job link]`: the recruiter and the senior headhunter review your resume
 
-## How it works (11 steps)
-1. Language
-2. Your resume
-3. The job listing
-4. How you'll apply
-5. Baseline score and the 3 biggest problems
-6. What your experience already proves, then questions only about real gaps
-7. Structure and draft, for your approval
-8. Design
-9. Build the PDF and rescore
-10. Cover letter or other files
-11. Hand-over, with a 3-item checklist
+## How it works: the team
+| Expert | Job |
+|---|---|
+| Resume optimizer | Runs the team, talks to you, settles disagreements in one line |
+| ATS specialist | Analyzes the listing, scores the resume 4 times |
+| Career consultant | Finds your proof, interviews you one question at a time |
+| Resume writer | Writes the resume and cover letter from your facts only |
+| Recruiter | Reads the draft like a hiring manager |
+| Designer | One-page PDF, cover letter, Word |
+| Senior headhunter | Fresh-eyes final review before you send |
+
+Stages: 1) intake 2) analysis (ATS specialist and career consultant in parallel) 3) your story, one question at a time 4) draft, reviewed 2-3 rounds 5) design and cover letter in parallel 6) final headhunter review, 2-3 rounds, then hand-over.
 
 ## Privacy
 Your files stay in a folder on your computer (Claude Code and the desktop app). Your resume and answers are sent to Claude to do the work, like any message you send Claude. Nothing is sent anywhere else.
