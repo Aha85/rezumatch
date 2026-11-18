@@ -65,8 +65,17 @@ kw = json.loads(pathlib.Path(a.keywords).read_text(encoding="utf-8"))
 
 
 def present(term):
-    t = _norm(term)
-    return t in norm
+    """Whole-word match. Most ATS also match simple plurals, so "expansion" finds "expansions"
+    and "QBRs" finds "QBR"."""
+    t = _norm(term).strip()
+    if not t:
+        return False
+    forms = {t, t + "s", t + "es"}
+    if t.endswith("es"):
+        forms.add(t[:-2])
+    if t.endswith("s"):
+        forms.add(t[:-1])
+    return any(" " + f + " " in norm for f in forms)
 
 
 # Keywords: 40
@@ -86,8 +95,15 @@ kw_score = round(40 * found_w / total_w) if total_w else 0
 # Title: 15
 title = kw.get("title", "")
 tw = [w for w in re.findall(r"\w+", title.lower()) if w not in {"of", "and", "the", "for", "&"}]
-if title and present(title):
+# Full points only when the title is in the headline (top lines) or on a role line.
+# Mentioned elsewhere ("ready for a Customer Success Manager role") counts as partial.
+_lines = [l for l in text.splitlines() if l.strip()]
+_top = _norm(" ".join(_lines[:4]))
+_roleish = [_norm(l) for l in _lines if re.search(r"(19|20)\d{2}", l) and len(l.split()) <= 14]
+if title and (_norm(title) in _top or any(_norm(title) in l for l in _roleish)):
     title_score = 15
+elif title and present(title):
+    title_score = 11
 elif tw:
     ratio = sum(1 for w in tw if present(w)) / len(tw)
     title_score = round(11 * ratio)
@@ -96,7 +112,7 @@ else:
 
 # Format: 15
 fmt = {}
-fmt["text readable"] = 3 if len(text.split()) > 150 else 0
+fmt["text extracts cleanly"] = 3 if len(text.split()) > 150 else 0  # very little text usually means images, text boxes or a thin resume
 fmt["length (1-2 pages)"] = 2 if pages <= 2 else 0
 fmt["no tables"] = 0 if has_table else 2
 fmt["single column"] = 0 if columns else 2
@@ -112,7 +128,13 @@ fmt_score = sum(fmt.values())
 
 # Measurable results: 5
 lines = [l for l in text.splitlines() if len(l.split()) >= 5]
-with_num = sum(1 for l in lines if re.search(r"\d", l))
+def _result_digits(l):
+    # years, date ranges, phone numbers and emails are not results
+    l = re.sub(r"[\w.+-]+@[\w-]+\.[\w.]+", " ", l)
+    l = re.sub(r"\+?\d[\d\s().-]{7,}\d", " ", l)
+    l = re.sub(r"(19|20)\d{2}", " ", l)
+    return re.search(r"\d", l)
+with_num = sum(1 for l in lines if _result_digits(l))
 ratio = with_num / len(lines) if lines else 0
 meas_score = 5 if ratio >= 0.35 else 4 if ratio >= 0.25 else 3 if ratio >= 0.15 else 2 if ratio > 0 else 0
 
@@ -145,5 +167,4 @@ else:
     if missing:
         print("missing keywords: " + ", ".join(missing))
     weak = [k for k, v in fmt.items() if v == 0]
-    if weak:
-        print("format problems: " + ", ".join(weak))
+    print("format problems: " + (", ".join(weak) if weak else "none"))

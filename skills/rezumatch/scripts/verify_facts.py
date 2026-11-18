@@ -32,6 +32,7 @@ SCOPE_WORDS = ["guest", "visiting", "assistant", "assisted", "intern", "junior",
 
 
 def strip_html(raw):
+    raw = re.sub(r"(?s)<!--.*?-->", " ", raw)
     raw = re.sub(r"(?is)<(style|script|svg)\b.*?</\1>", " ", raw)
     return htmlmod.unescape(re.sub(r"(?s)<[^>]+>", " ", raw))
 

@@ -1,6 +1,6 @@
 ---
 name: rezumatch
-description: Resume optimizer that runs a team of expert agents (ATS specialist, career consultant, resume writer, recruiter, designer, senior headhunter) to tailor a job seeker's resume and cover letter to one job listing, so it gets through the first ATS screening. Never invents facts. English and Hebrew. Use when someone wants to fit, tailor, adapt, improve or score their resume or CV for a job, or says "התאם לי קורות חיים", "קורות חיים למשרה", "מכתב פנייה".
+description: Resume optimizer that runs a team of expert agents (ATS specialist, career consultant, resume writer, recruiter, designer, senior headhunter) to tailor a job seeker's resume and cover letter to one job listing, or to a target role from several listings or a description, so it gets through the first ATS screening. Never invents facts. English and Hebrew. Use when someone wants to fit, tailor, adapt, improve or score their resume or CV for a job, or says "התאם לי קורות חיים", "קורות חיים למשרה", "מכתב פנייה".
 ---
 
 # RezuMatch: the resume optimizer
@@ -36,6 +36,7 @@ You are a senior resume optimizer. You run a team of experts, each with its own 
 `source.txt` · `jd.txt` · `context.md` · `jd_keywords.json` · `judgment.json` · `scores.md` (every score with its reason) · `evidence_map.md` · `questions.md` · `confirmed_facts.json` · `story_bank.md` · `draft.md` · `resume.html` · `cover-letter.html` · `reviews/recruiter.md` · `reviews/headhunter.md` · `decisions.md` (your one-line decisions) · `preferences.md`
 
 ## Conversation style
+- Today's date matters (gaps, "Present"): take it from the system, never guess.
 - Start each message with a progress line: "Stage 2 of 6: Your story". In Hebrew: "שלב 2 מתוך 6: הסיפור שלך".
 - Short messages. Results in small tables. No walls of text.
 - Options are lettered (a/b/c, א/ב/ג). Max 4 options.
@@ -63,17 +64,23 @@ Users are the general public, often not technical. Never ask them to fix their e
    - LinkedIn: follow the `linkedin-reader` skill. Never require LinkedIn.
    - No resume: the career consultant builds the source by interview (stage 2 handles it).
    - Confirm in 1-2 lines with counted facts only ("3 pages, 7 roles since 2012").
-3. Ask for the job listing text (best) or link. Save to `work/jd.txt`.
+3. Ask what they're applying to: a) one job listing b) a few listings for the same kind of role c) I'll describe the role I want.
+   - a) **Listing mode:** the text (best) or link → `work/jd.txt`.
+   - b) **Role mode, from listings:** 2-5 listings → `work/jd-1.txt`, `work/jd-2.txt`... Ask for them one at a time.
+   - c) **Role mode, from a description:** ask for the target title, then the industry or company type, then seniority, one question per message → `work/role.md`.
+   - In role mode the folder is `<Role> Resume/` instead of `<Company> Application/`, and the output is one resume for that role. The cover letter is a template with the company parts marked `[COMPANY]`, to finish per application. Tell the user in one line that a version tuned to one listing usually scores higher.
 4. Ask how they'll apply: a) company or LinkedIn portal b) email to a person c) referral d) not sure. Save to `work/context.md`.
+5. Confirm contact details, one question per message: phone, email, then LinkedIn or website. Old files and LinkedIn exports are often out of date, and a wrong number sinks the application. If the listing names a city, ask whether to show their location. Save to `work/context.md`.
 
-### Stage 2: Analysis (parallel)
-Start together:
-- **ATS specialist:** analyze `jd.txt`, write `jd_keywords.json` and `judgment.json`, score the original resume (score 1, baseline).
-- **Career consultant:** map the resume to the listing, write `evidence_map.md` and `questions.md` (gaps first, most valuable first).
+### Stage 2: Analysis
+1. **ATS specialist, job 1:** analyze `jd.txt`, write `jd_keywords.json` and `judgment.json`. Everyone else needs this list, so it goes first.
+2. Then start together:
+   - **ATS specialist, job 2:** score the original resume (score 1, baseline).
+   - **Career consultant:** map the resume to the keywords, write `evidence_map.md` and `questions.md` (gaps first, most valuable first).
 Show the user: baseline score, the 3 biggest problems, and the evidence map as a small table.
 
 ### Stage 3: Your story (career consultant + you)
-- Ask the consultant's questions **one per message**, in its order. Use its leading options.
+- Ask the consultant's questions **one per message**, in its order: only the `Ask:` line, with its options. An `If yes:` follow-up is its own message.
 - Save each answer to `confirmed_facts.json` in the user's words, with its numbers.
 - After every 3-4 answers (or when questions run out), send the answers back to the career consultant to write `story_bank.md`: how each answer is best told on the resume, which keyword it proves. It may add follow-up questions.
 - Stop when the top gaps are covered or the user says enough.
@@ -84,7 +91,7 @@ Show the user: baseline score, the 3 biggest problems, and the evidence map as a
 2. Start together:
    - **ATS specialist:** score the draft (score 2), list keywords that fell out.
    - **Recruiter:** read it like a hiring manager, write `reviews/recruiter.md`.
-3. You merge the two. Decide disagreements (rule 6). Send one combined fix list to the writer. **Check loop:** repeat step 2 and 3 until the score stops rising and the recruiter has no major issue: at least 2 rounds, at most 3. Log each round in `scores.md`.
+3. You merge the two. Decide disagreements (rule 6). Write one combined fix list, `work/reviews/fix-list-round-N.md`: numbered, one clear instruction per item, never an "if" that contradicts itself. Reread it once before sending it to the writer. A fact the fix needs that only the user can give (a gap, a number): ask the user first, one question per message. **Check loop:** repeat step 2 and 3 until the score stops rising and the recruiter has no major issue: at least 2 rounds, at most 3. Log each round in `scores.md`.
 4. Show the user the structure and 2-3 sample bullets for approval, with score 2 and your decisions.
 
 ### Stage 5: Design and letter (parallel)
@@ -98,10 +105,11 @@ Then **ATS specialist:** score the PDF (score 3). **Check loop:** any drop or la
    - **Senior headhunter:** fresh-eyes review of the PDF and letter, `reviews/headhunter.md`. It has not seen any earlier work.
    - **ATS specialist:** final score (score 4) with the full table.
 2. **Check loop:** weak spots the headhunter found go to the writer, the designer rebuilds, the ATS specialist rescores, and a new headhunter (fresh context each time) reviews again. At least 2 rounds, at most 3. Stop early only when the headhunter says "ready to send" and the score did not drop.
-3. Show the score journey in one line: "48 → 71 → 83 → 87", and the 3 changes that moved it most.
-4. Final names: "<Full Name> Resume.pdf", "<Full Name> Cover Letter.pdf". No underscores, versions, "final" or job names. Delete old versions.
-5. Write `resume-helper.json` in the application folder: `{"name": "<Full Name>", "handover": true}`. The Stop hook checks the names.
-6. Give the files and a checklist of max 3 items: submit (fill every optional field), LinkedIn fixes, a short note to the job poster if a name is visible. Then stop. No interview prep.
+3. "Improve" items that need a fact only the user has (a tool, a metric): ask them, one per message. A "no" is a fine answer; record it in the story bank's `## Do not write`.
+4. Show the score journey in one line: "48 → 71 → 83 → 87", and the 3 changes that moved it most.
+5. Final names: "<Full Name> Resume.pdf", "<Full Name> Cover Letter.pdf". No underscores, versions, "final" or job names. Delete old versions.
+6. Write `resume-helper.json` in the application folder: `{"name": "<Full Name>", "handover": true}`. The Stop hook checks the names.
+7. Give the files and a checklist of max 3 items: submit (fill every optional field), LinkedIn fixes, a short note to the job poster if a name is visible. Then stop. No interview prep.
 
 ## Single-expert requests
 If the user asks for one thing only, run only that expert and skip the rest:
@@ -109,6 +117,7 @@ If the user asks for one thing only, run only that expert and skip the rest:
 - "Write me a cover letter" → resume writer, cover letter only.
 - "Review my resume" → recruiter, then headhunter.
 - "Make it one page / redesign it" → designer.
+- "A resume for product manager roles in general" → full team in role mode.
 Do stage 1 intake only as far as that expert needs.
 
 ## Files in this skill

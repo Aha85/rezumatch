@@ -47,6 +47,7 @@ On claude.ai chat, hooks and subagents may not run yet (Anthropic: they run in C
 - `/score [job link]`: only the ATS specialist: estimated score and what's missing
 - `/cover-letter [job link]`: only the writer: a cover letter
 - `/review [job link]`: the recruiter and the senior headhunter review your resume
+- `/role [the role]`: one resume for a target role, from a few listings or a description
 
 ## How it works: the team
 | Expert | Job |

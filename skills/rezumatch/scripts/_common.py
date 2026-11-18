@@ -110,7 +110,39 @@ def layout_flags(pdf):
         if run >= 2:
             left = sum(1 for w in words if w["x1"] / pg.width * 100 <= b - run + 1)
             right = sum(1 for w in words if w["x0"] / pg.width * 100 >= b)
-            if left >= 15 and right >= 15:
+            if left >= 8 and right >= 15 and left >= 0.1 * len(words):  # a narrow sidebar is still a second column
                 multi = True
                 break
+    if not multi:
+        multi = _sidebar_lines(pg, words)
     return has_table, multi
+
+
+def _sidebar_lines(pg, words):
+    """Second check for a sidebar: the page has a second left margin (main column) at 25-70%
+    of the width, and 3+ lines on the left side that all end before that margin."""
+    from collections import defaultdict
+    rows = defaultdict(list)
+    for w in words:
+        rows[round(w["top"] / 3)].append(w)
+    lines = []  # text segments: a row split wherever the gap between words is wide
+    for ws in rows.values():
+        ws.sort(key=lambda w: w["x0"])
+        seg = [ws[0]]
+        for a, b in zip(ws, ws[1:]):
+            if (b["x0"] - a["x1"]) / pg.width > 0.015:
+                lines.append((seg[0]["x0"] / pg.width, seg[-1]["x1"] / pg.width))
+                seg = []
+            seg.append(b)
+        lines.append((seg[0]["x0"] / pg.width, seg[-1]["x1"] / pg.width))
+    starts = defaultdict(int)
+    for x0, _ in lines:
+        starts[round(x0 * 50)] += 1
+    for b, n in starts.items():
+        m = b / 50
+        if n < 3 or not 0.25 <= m <= 0.7:
+            continue
+        left = [x1 for x0, x1 in lines if x0 < m - 0.05]
+        if len(left) >= 3 and all(x1 < m for x1 in left):
+            return True
+    return False
