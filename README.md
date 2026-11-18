@@ -60,7 +60,7 @@ On claude.ai chat, hooks and subagents may not run yet (Anthropic: they run in C
 | Designer | One-page PDF, cover letter, Word |
 | Senior headhunter | Fresh-eyes final review before you send |
 
-Stages: 1) intake 2) analysis (ATS specialist and career consultant in parallel) 3) your story, one question at a time 4) draft, reviewed 2-3 rounds 5) design and cover letter in parallel 6) final headhunter review, 2-3 rounds, then hand-over.
+Stages: 1) intake 2) analysis (ATS specialist and career consultant in parallel) 3) your story, one question at a time 4) draft, reviewed 2-3 rounds, then you approve the full text (and the cover letter text) 5) design, only after your approval 6) final headhunter review, 2-3 rounds, then hand-over.
 
 ## Privacy
 Your files stay in a folder on your computer (Claude Code and the desktop app). Your resume and answers are sent to Claude to do the work, like any message you send Claude. Nothing is sent anywhere else.

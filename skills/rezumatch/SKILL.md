@@ -93,19 +93,20 @@ Show the user: baseline score, the 3 biggest problems, and the evidence map as a
    - **ATS specialist:** score the draft (score 2), list keywords that fell out.
    - **Recruiter:** read it like a hiring manager, write `reviews/recruiter.md`.
 3. You merge the two. Decide disagreements (rule 7). Write one combined fix list, `work/reviews/fix-list-round-N.md`: numbered, one clear instruction per item, never an "if" that contradicts itself. Reread it once before sending it to the writer. A fact the fix needs that only the user can give (a gap, a number): ask the user first, one question per message. **Check loop:** repeat step 2 and 3 until the score stops rising and the recruiter has no major issue: at least 2 rounds, at most 3. Log each round in `scores.md`.
-4. Show the user the structure and 2-3 sample bullets for approval, with score 2 and your decisions.
+4. **Text approval, before any design.** Show the user the full resume text from `draft.md` in one readable block, in reading order, with score 2 and your one-line decisions under it. Ask one question: a) approve b) I want to change something. Text changes are cheap now and expensive after the PDF.
+   - Changes: the user's own words win. The writer applies them, then the fact check, slop check and a quick rescore run, and you show only the changed lines. Repeat until they approve.
+5. Ask one question: a) cover letter b) Word version too c) neither. For a cover letter, the writer drafts the text (it runs the slop check itself), and you show the full letter for approval the same way. No letter PDF before the text is approved.
 
-### Stage 5: Design and letter (parallel)
-Start together:
-- **Designer:** fit `resume.html` to one page (or the user's page count), visual check, build `<Full Name> Resume.pdf`. The hook checks facts first. If it blocks, ask the user about each item, one per message.
-- **Resume writer:** the cover letter, if the context needs one (ask the user first: a) cover letter b) Word version c) neither).
+### Stage 5: Design (only approved text)
+- **Designer:** fit the approved `resume.html` to one page (or the user's page count), visual check, build `<Full Name> Resume.pdf`, and the cover letter PDF if there is an approved letter. The hook checks facts and slop first. If it blocks, ask the user about each item, one per message.
+- The designer never changes wording. If the text doesn't fit, the writer shortens it and you show the user the changed lines before the rebuild.
 Then **ATS specialist:** score the PDF (score 3). **Check loop:** any drop or layout flag goes back to the designer (or writer) and is rescored, up to 3 rounds, until the PDF scores at least as high as the draft.
 
 ### Stage 6: Final review and hand-over
 1. Start together:
    - **Senior headhunter:** fresh-eyes review of the PDF and letter, `reviews/headhunter.md`. It has not seen any earlier work.
    - **ATS specialist:** final score (score 4) with the full table.
-2. **Check loop:** weak spots the headhunter found go to the writer, the designer rebuilds, the ATS specialist rescores, and a new headhunter (fresh context each time) reviews again. At least 2 rounds, at most 3. Stop early only when the headhunter says "ready to send" and the score did not drop.
+2. **Check loop:** weak spots the headhunter found go to the writer; you show the user the changed lines and get a yes before the designer rebuilds, the ATS specialist rescores, and a new headhunter (fresh context each time) reviews again. At least 2 rounds, at most 3. Stop early only when the headhunter says "ready to send" and the score did not drop.
 3. "Improve" items that need a fact only the user has (a tool, a metric): ask them, one per message. A "no" is a fine answer; record it in the story bank's `## Do not write`.
 4. Show the score journey in one line: "48 → 71 → 83 → 87", and the 3 changes that moved it most.
 5. Final names: "<Full Name> Resume.pdf", "<Full Name> Cover Letter.pdf". No underscores, versions, "final" or job names. Delete old versions.
