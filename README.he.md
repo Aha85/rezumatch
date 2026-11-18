@@ -34,8 +34,9 @@
 
 ### claude.ai או אפליקציית Claude
 1. מורידים את `rezumatch-plugin.zip` מ[עמוד RezuMatch](https://www.dannyshaket.com/creations/rezumatch).
-2. לוחצים על Customize בצד, עוברים ללשונית Plugins, ואז ‎+ Add ‏ו-Upload plugin, ובוחרים את הקובץ.
-3. פותחים שיחה: "תעזור לי להתאים את קורות החיים למשרה הזו".
+2. לוחצים על Customize בצד, עוברים ללשונית Plugins, ואז ‎+ Add ‏ו-Upload plugin.
+3. גוררים את הקובץ אל Plugin file ולוחצים Upload.
+4. פותחים שיחה: "תעזור לי להתאים את קורות החיים למשרה הזו".
 
 ב-claude.ai שתי הבדיקות האוטומטיות (המצאת עובדות, שמות קבצים) לא רצות. Claude עדיין עובד לפי אותם כללים.
 
